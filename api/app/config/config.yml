@@ -18,7 +18,7 @@ framework:
     form: ~
     csrf_protection: ~
     validation: { enable_annotations: true }
-    #serializer: { enable_annotations: true }
+    serializer: { enable_annotations: true }
     default_locale: '%locale%'
     trusted_hosts: ~
     session:
@@ -65,3 +65,20 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+# Sensio Framework Configuration
+#sensio_framework_extra:
+#    view: { annotations: false }
+
+# FOSRest Configuration
+fos_rest:
+    body_converter:
+        enabled: true
+    format_listener:
+        rules:
+            - { path: '^/', priorities: ['json'], fallback_format: 'json' }
+    view:
+        view_response_listener: 'force'
+        formats: { json: true, xml: false, rss: false }
+    serializer:
+        serialize_null: true
