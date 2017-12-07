@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="bilemo_user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var int
@@ -19,29 +21,43 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
      */
-    private $firstname;
+    protected $firstname;
 
     /**
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
-    private $lastname;
+    protected $lastname;
 
     /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255)
      */
-    private $phone;
+    protected $phone;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Application")
+     */
+    protected $applications;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->applications = new ArrayCollection();
+        $this->setUsername($this->firstname. ' '. $this->lastname);
+        $this->setEnabled(true);
+    }
 
     /**
      * Get id
@@ -123,6 +139,28 @@ class User
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Add application
+     *
+     * @param Application application
+     *
+     * @return Command
+     */
+    public function addApplication(Application $application)
+    {
+        $this->applications[] = $application;
+        return $this;
+    }
+    /**
+     * Remove application
+     *
+     * @param Application $application
+     */
+    public function removeApplication(Application $application)
+    {
+        $this->applications->removeElement($application);
     }
 }
 

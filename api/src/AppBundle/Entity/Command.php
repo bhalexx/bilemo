@@ -85,6 +85,7 @@ class Command
         $this->products[] = $product;
         return $this;
     }
+
     /**
      * Remove product
      *
