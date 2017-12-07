@@ -72,7 +72,7 @@ class OsController extends FOSRestController
 
     /**
      * @Rest\Put(
-     *     path = "os/{id}",
+     *     path = "/os/{id}",
      *     name = "api_os_update",
      *     requirements = { "id" = "\d+" }
      * )
@@ -93,7 +93,7 @@ class OsController extends FOSRestController
 
     /**
      * @Rest\Delete(
-     *     path = "os/{id}",
+     *     path = "/os/{id}",
      *     name = "api_os_delete",
      *     requirements = { "id" = "\d+" }
      * )

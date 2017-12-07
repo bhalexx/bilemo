@@ -73,7 +73,7 @@ class ApplicationController extends FOSRestController
 
     /**
      * @Rest\Put(
-     *     path = "applications/{id}",
+     *     path = "/applications/{id}",
      *     name = "api_application_update",
      *     requirements = { "id" = "\d+" }
      * )
@@ -93,7 +93,7 @@ class ApplicationController extends FOSRestController
 
     /**
      * @Rest\Delete(
-     *     path = "applications/{id}",
+     *     path = "/applications/{id}",
      *     name = "api_application_delete",
      *     requirements = { "id" = "\d+" }
      * )

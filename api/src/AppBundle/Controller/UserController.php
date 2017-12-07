@@ -72,7 +72,7 @@ class UserController extends FOSRestController
 
     /**
      * @Rest\Put(
-     *     path = "users/{id}",
+     *     path = "/users/{id}",
      *     name = "api_user_update",
      *     requirements = { "id" = "\d+" }
      * )
@@ -98,7 +98,7 @@ class UserController extends FOSRestController
 
     /**
      * @Rest\Delete(
-     *     path = "users/{id}",
+     *     path = "/users/{id}",
      *     name = "api_user_delete",
      *     requirements = { "id" = "\d+" }
      * )
