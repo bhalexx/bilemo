@@ -72,7 +72,7 @@ class ManufacturerController extends FOSRestController
 
     /**
      * @Rest\Put(
-     *     path = "manufacturers/{id}",
+     *     path = "/manufacturers/{id}",
      *     name = "api_manufacturer_update",
      *     requirements = { "id" = "\d+" }
      * )
@@ -92,7 +92,7 @@ class ManufacturerController extends FOSRestController
 
     /**
      * @Rest\Delete(
-     *     path = "manufacturers/{id}",
+     *     path = "/manufacturers/{id}",
      *     name = "api_manufacturer_delete",
      *     requirements = { "id" = "\d+" }
      * )
