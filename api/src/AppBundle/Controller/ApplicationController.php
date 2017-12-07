@@ -86,6 +86,7 @@ class ApplicationController extends FOSRestController
     public function updateAction(Application $application, Application $newApplication)
     {
         $application->setName($newApplication->getName());
+        $application->setToken($newApplication->getToken());
         $this->getDoctrine()->getManager()->flush();
 
         return $application;
