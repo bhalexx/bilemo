@@ -31,9 +31,9 @@ class Application
     /**
      * @var string
      *
-     * @ORM\Column(name="token", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255)
      */
-    private $token;
+    private $email;
 
 
     /**
@@ -71,27 +71,27 @@ class Application
     }
 
     /**
-     * Set token
+     * Set email
      *
-     * @param string $token
+     * @param string $email
      *
      * @return Application
      */
-    public function setToken($token)
+    public function setEmail($email)
     {
-        $this->token = $token;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Get token
+     * Get email
      *
      * @return string
      */
-    public function getToken()
+    public function getEmail()
     {
-        return $this->token;
+        return $this->email;
     }
 }
 
