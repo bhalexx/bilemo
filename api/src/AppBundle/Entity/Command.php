@@ -26,6 +26,7 @@ class Command
      * @var string
      *
      * @ORM\ManyToMany(targetEntity="Product")
+     * @ORM\JoinTable(name="bilemo_command_product")
      */
     private $products;
 

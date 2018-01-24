@@ -29,6 +29,10 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    AppBundle\Security\UserProvider:
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+    
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Application
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="bilemo_application")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ApplicationRepository")
  */
-class Application
+class Application implements UserInterface
 {
     /**
      * @var int
@@ -31,9 +32,21 @@ class Application
     /**
      * @var string
      *
-     * @ORM\Column(name="token", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255)
      */
-    private $token;
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="uri", type="string", length=255)
+     */
+    private $uri;
+
+    /**
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = array();
 
 
     /**
@@ -71,27 +84,99 @@ class Application
     }
 
     /**
-     * Set token
+     * Set email
      *
-     * @param string $token
+     * @param string $email
      *
      * @return Application
      */
-    public function setToken($token)
+    public function setEmail($email)
     {
-        $this->token = $token;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Get token
+     * Get email
      *
      * @return string
      */
-    public function getToken()
+    public function getEmail()
     {
-        return $this->token;
+        return $this->email;
+    }
+
+    /**
+     * Set uri
+     *
+     * @param string $uri
+     *
+     * @return Application
+     */
+    public function setUri($uri)
+    {
+        $this->uri = $uri;
+
+        return $this;
+    }
+
+    /**
+     * Get uri
+     *
+     * @return string
+     */
+    public function getUri()
+    {
+        return $this->uri;
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+//        return ['ROLE_USER'];
+    }
+
+    /**
+     * Returns the password used to authenticate the user.
+     *
+     * @return string The password
+     */
+    public function getPassword()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     */
+    public function eraseCredentials()
+    {
+        return null;
     }
 }
-

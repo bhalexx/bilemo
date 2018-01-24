@@ -24,7 +24,7 @@ class ApplicationController extends FOSRestController
     public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+        
         $applications = $em->getRepository('AppBundle:Application')->findAll();
 
         return $applications;
@@ -60,9 +60,21 @@ class ApplicationController extends FOSRestController
     public function createAction(Application $application)
     {
         $em = $this->getDoctrine()->getManager();
-
+        
         $em->persist($application);
         $em->flush();
+
+        $clientManager = $this->container->get('fos_oauth_server.client_manager.default');
+        $client = $clientManager->createClient();
+        $client->setRedirectUris(array($application->getUri()));
+        $client->setAllowedGrantTypes(array('authorization_code'));
+        $clientManager->updateClient($client);
+
+        // return $this->generateUrl('fos_oauth_server_authorize', array(
+        //     'client_id'     => $client->getPublicId(),
+        //     'redirect_uri'  => $application->getUri(),
+        //     'response_type' => 'code'
+        // ));
 
         return $this->view(
             $application,
@@ -86,7 +98,8 @@ class ApplicationController extends FOSRestController
     public function updateAction(Application $application, Application $newApplication)
     {
         $application->setName($newApplication->getName());
-        $application->setToken($newApplication->getToken());
+        $application->setEmail($newApplication->getEmail());
+        $application->setUri($newApplication->getUri());
         $this->getDoctrine()->getManager()->flush();
 
         return $application;
