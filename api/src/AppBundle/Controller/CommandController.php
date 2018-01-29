@@ -14,7 +14,7 @@ class CommandController extends FOSRestController
 {
     /**
      * @Rest\Get(
-     *     path = "/commands",
+     *     path = "/api/commands",
      *     name = "api_command_list"
      * )
      * @Rest\View(
@@ -32,7 +32,7 @@ class CommandController extends FOSRestController
 
     /**
      * @Rest\Get(
-     *     path = "/commands/{id}",
+     *     path = "/api/commands/{id}",
      *     name = "api_command_view",
      *     requirements = { "id" = "\d+" }
      * )
@@ -48,7 +48,7 @@ class CommandController extends FOSRestController
 
     /**
      * @Rest\Post(
-     *     path = "/commands",
+     *     path = "/api/commands",
      *     name = "api_command_create"
      * )
      * @Rest\View(
@@ -73,7 +73,7 @@ class CommandController extends FOSRestController
 
     /**
      * @Rest\Put(
-     *     path = "/commands/{id}",
+     *     path = "/api/commands/{id}",
      *     name = "api_command_update",
      *     requirements = { "id" = "\d+" }
      * )
@@ -93,7 +93,7 @@ class CommandController extends FOSRestController
 
     /**
      * @Rest\Delete(
-     *     path = "/commands/{id}",
+     *     path = "/api/commands/{id}",
      *     name = "api_command_delete",
      *     requirements = { "id" = "\d+" }
      * )

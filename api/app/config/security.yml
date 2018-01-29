@@ -3,6 +3,7 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
+        AppBundle\Entity\Application: bcrypt
 
     role_hierarchy:
         ROLE_USER: ROLE_USER
@@ -20,16 +21,15 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            pattern: ^/
-            form_login:
-                provider: fos_userbundle
-                csrf_token_generator: security.csrf.token_manager
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
 
-            logout:       true
-            anonymous:    true
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  false # can be omitted as its default value
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+       - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }

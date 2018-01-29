@@ -47,7 +47,7 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Application")     *
+     * @ORM\ManyToMany(targetEntity="Application")
      * @ORM\JoinTable(name="bilemo_user_application")
      */
     protected $applications;
