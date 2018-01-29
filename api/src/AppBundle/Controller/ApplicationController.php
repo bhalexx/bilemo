@@ -65,6 +65,7 @@ class ApplicationController extends FOSRestController
         //Todo: remove this from here - create service to do this + send email with client's credentials
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $plainPassword = substr(str_shuffle($chars), 0, 25);
+        $application->setPlainPassword($plainPassword);
         $encoded = $encoder->encodePassword($application, $plainPassword);
         $application->setPassword($encoded);
 
