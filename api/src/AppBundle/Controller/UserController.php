@@ -13,7 +13,7 @@ class UserController extends FOSRestController
 {
     /**
      * @Rest\Get(
-     *     path = "/users",
+     *     path = "/api/users",
      *     name = "api_user_list"
      * )
      * @Rest\View(
@@ -31,7 +31,7 @@ class UserController extends FOSRestController
 
     /**
      * @Rest\Get(
-     *     path = "/users/{id}",
+     *     path = "/api/users/{id}",
      *     name = "api_user_view",
      *     requirements = { "id" = "\d+" }
      * )
@@ -47,7 +47,7 @@ class UserController extends FOSRestController
 
     /**
      * @Rest\Post(
-     *     path = "/users",
+     *     path = "/api/users",
      *     name = "api_user_create"
      * )
      * @Rest\View(
@@ -72,7 +72,7 @@ class UserController extends FOSRestController
 
     /**
      * @Rest\Put(
-     *     path = "/users/{id}",
+     *     path = "/api/users/{id}",
      *     name = "api_user_update",
      *     requirements = { "id" = "\d+" }
      * )
@@ -98,7 +98,7 @@ class UserController extends FOSRestController
 
     /**
      * @Rest\Delete(
-     *     path = "/users/{id}",
+     *     path = "/api/users/{id}",
      *     name = "api_user_delete",
      *     requirements = { "id" = "\d+" }
      * )

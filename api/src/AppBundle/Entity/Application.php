@@ -25,9 +25,9 @@ class Application implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
-    private $name;
+    private $username;
 
     /**
      * @var string
@@ -35,6 +35,18 @@ class Application implements UserInterface
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @var string
+     */
+    private $plainPassword;
 
     /**
      * @var string
@@ -48,7 +60,6 @@ class Application implements UserInterface
      */
     private $roles = array();
 
-
     /**
      * Get id
      *
@@ -57,30 +68,6 @@ class Application implements UserInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Application
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -139,7 +126,20 @@ class Application implements UserInterface
     public function getRoles()
     {
         return $this->roles;
-//        return ['ROLE_USER'];
+    }
+
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     *
+     * @return Application
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     /**
@@ -149,7 +149,7 @@ class Application implements UserInterface
      */
     public function getPassword()
     {
-        return null;
+        return $this->password;
     }
 
     /**
@@ -169,7 +169,7 @@ class Application implements UserInterface
      */
     public function getUsername()
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**
@@ -178,5 +178,57 @@ class Application implements UserInterface
     public function eraseCredentials()
     {
         return null;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return Application
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return Application
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Set plainPassword
+     *
+     * @param string $plainPassword
+     *
+     * @return Application
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * Get plainPassword
+     *
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
     }
 }

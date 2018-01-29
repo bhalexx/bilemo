@@ -13,7 +13,7 @@ class ManufacturerController extends FOSRestController
 {
     /**
      * @Rest\Get(
-     *     path = "/manufacturers",
+     *     path = "/api/manufacturers",
      *     name = "api_manufacturer_list"
      * )
      * @Rest\View(
@@ -31,7 +31,7 @@ class ManufacturerController extends FOSRestController
 
     /**
      * @Rest\Get(
-     *     path = "/manufacturers/{id}",
+     *     path = "/api/manufacturers/{id}",
      *     name = "api_manufacturer_view",
      *     requirements = { "id" = "\d+" }
      * )
@@ -47,7 +47,7 @@ class ManufacturerController extends FOSRestController
 
     /**
      * @Rest\Post(
-     *     path = "/manufacturers",
+     *     path = "/api/manufacturers",
      *     name = "api_manufacturer_create"
      * )
      * @Rest\View(
@@ -72,7 +72,7 @@ class ManufacturerController extends FOSRestController
 
     /**
      * @Rest\Put(
-     *     path = "/manufacturers/{id}",
+     *     path = "/api/manufacturers/{id}",
      *     name = "api_manufacturer_update",
      *     requirements = { "id" = "\d+" }
      * )
@@ -92,7 +92,7 @@ class ManufacturerController extends FOSRestController
 
     /**
      * @Rest\Delete(
-     *     path = "/manufacturers/{id}",
+     *     path = "/api/manufacturers/{id}",
      *     name = "api_manufacturer_delete",
      *     requirements = { "id" = "\d+" }
      * )

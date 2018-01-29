@@ -13,7 +13,7 @@ class OsController extends FOSRestController
 {
     /**
      * @Rest\Get(
-     *     path = "/os",
+     *     path = "/api/os",
      *     name = "api_os_list"
      * )
      * @Rest\View(
@@ -31,7 +31,7 @@ class OsController extends FOSRestController
 
     /**
      * @Rest\Get(
-     *     path = "/os/{id}",
+     *     path = "/api/os/{id}",
      *     name = "api_os_view",
      *     requirements = { "id" = "\d+" }
      * )
@@ -47,7 +47,7 @@ class OsController extends FOSRestController
 
     /**
      * @Rest\Post(
-     *     path = "/os",
+     *     path = "/api/os",
      *     name = "api_os_create"
      * )
      * @Rest\View(
@@ -72,7 +72,7 @@ class OsController extends FOSRestController
 
     /**
      * @Rest\Put(
-     *     path = "/os/{id}",
+     *     path = "/api/os/{id}",
      *     name = "api_os_update",
      *     requirements = { "id" = "\d+" }
      * )
@@ -93,7 +93,7 @@ class OsController extends FOSRestController
 
     /**
      * @Rest\Delete(
-     *     path = "/os/{id}",
+     *     path = "/api/os/{id}",
      *     name = "api_os_delete",
      *     requirements = { "id" = "\d+" }
      * )

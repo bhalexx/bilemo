@@ -17,10 +17,10 @@ class ApplicationProvider implements UserProviderInterface
         $this->em = $em;
     }
 
-    public function loadUserByUsername($name)
+    public function loadUserByUsername($username)
     {
-        $application = $this->em->getRepository('AppBundle:Application')->findOneByName($name);
-
+        $application = $this->em->getRepository('AppBundle:Application')->findOneByUsername($username);
+        
         if (!$application) {
             throw new \LogicException("Unexisting application");
         }
