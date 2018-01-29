@@ -13,7 +13,7 @@ class MobileController extends FOSRestController
 {
     /**
      * @Rest\Get(
-     *     path = "/mobiles",
+     *     path = "/api/mobiles",
      *     name = "api_mobile_list"
      * )
      * @Rest\View(
@@ -31,7 +31,7 @@ class MobileController extends FOSRestController
 
     /**
      * @Rest\Get(
-     *     path = "/mobiles/{id}",
+     *     path = "/api/mobiles/{id}",
      *     name = "api_mobile_view",
      *     requirements = { "id" = "\d+" }
      * )
@@ -47,7 +47,7 @@ class MobileController extends FOSRestController
 
     /**
      * @Rest\Post(
-     *     path = "/mobiles",
+     *     path = "/api/mobiles",
      *     name = "api_mobile_create"
      * )
      * @Rest\View(
@@ -72,7 +72,7 @@ class MobileController extends FOSRestController
 
     /**
      * @Rest\Put(
-     *     path = "/mobiles/{id}",
+     *     path = "/api/mobiles/{id}",
      *     name = "api_mobile_update",
      *     requirements = { "id" = "\d+" }
      * )
@@ -100,7 +100,7 @@ class MobileController extends FOSRestController
 
     /**
      * @Rest\Delete(
-     *     path = "/mobiles/{id}",
+     *     path = "/api/mobiles/{id}",
      *     name = "api_mobile_delete",
      *     requirements = { "id" = "\d+" }
      * )
