@@ -4,12 +4,76 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Command
  *
  * @ORM\Table(name="bilemo_command")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CommandRepository")
+ *
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_command_view",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "list",
+ *     href = @Hateoas\Route(
+ *         "api_command_list",
+ *         absolute = true
+ *     )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "create",
+ *     href = @Hateoas\Route(
+ *         "api_command_create",
+ *         absolute = true
+ *     )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "update",
+ *     href = @Hateoas\Route(
+ *         "api_command_update",
+ *         parameters = { "id" = "expr(object.getId())" },
+ *         absolute = true
+ *     )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "delete",
+ *     href = @Hateoas\Route(
+ *         "api_command_delete",
+ *         parameters = { "id" = "expr(object.getId())" },
+ *         absolute = true
+ *     )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "products",
+ *     embedded = @Hateoas\Embedded("expr(object.getProducts())")
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "user",
+ *     embedded = @Hateoas\Embedded("expr(object.getUser())")
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "deliveryAddress",
+ *     embedded = @Hateoas\Embedded("expr(object.getdeliveryAddress())")
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "application",
+ *     embedded = @Hateoas\Embedded("expr(object.getApplication())")
+ * )
  */
 class Command
 {

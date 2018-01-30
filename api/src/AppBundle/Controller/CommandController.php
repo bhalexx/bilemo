@@ -17,6 +17,7 @@ class CommandController extends FOSRestController
      *     path = "/api/commands",
      *     name = "api_command_list"
      * )
+     * 
      * @Rest\View(
      *     statusCode = 200
      * )
