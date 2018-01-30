@@ -3,12 +3,61 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Mobile
  *
  * @ORM\Table(name="mobile")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MobileRepository")
+ * 
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_mobile_view",
+ *          parameters = { "id" = "expr(object.getId())" },
+ *          absolute = true
+ *      )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "list",
+ *     href = @Hateoas\Route(
+ *         "api_mobile_list",
+ *         absolute = true
+ *     )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "create",
+ *     href = @Hateoas\Route(
+ *         "api_mobile_create",
+ *         absolute = true
+ *     )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "update",
+ *     href = @Hateoas\Route(
+ *         "api_mobile_update",
+ *         parameters = { "id" = "expr(object.getId())" },
+ *         absolute = true
+ *     )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "delete",
+ *     href = @Hateoas\Route(
+ *         "api_mobile_delete",
+ *         parameters = { "id" = "expr(object.getId())" },
+ *         absolute = true
+ *     )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "os",
+ *     embedded = @Hateoas\Embedded("expr(object.getOs())")
+ * )
  */
 class Mobile extends Product
 {
