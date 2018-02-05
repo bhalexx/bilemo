@@ -3,13 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
+use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Os
  *
- * @ORM\Table(name="bilemo_os")
+ * @ORM\Table(name="bilemo_os", uniqueConstraints={@UniqueConstraint(name="unique_os", columns={"name", "version"})})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\OsRepository")
  *
  * @Hateoas\Relation(
@@ -73,6 +75,8 @@ class Os
      *
      * @ORM\Column(name="name", type="string", length=255)
      *
+     * @Assert\NotBlank(message = "OS name is required.")
+     *
      * @Serializer\Since("1.0")
      */
     private $name;
@@ -81,6 +85,8 @@ class Os
      * @var string
      *
      * @ORM\Column(name="version", type="string", length=255)
+     *
+     * @Assert\NotBlank(message = "OS version is required.")
      *
      * @Serializer\Since("1.0")
      */

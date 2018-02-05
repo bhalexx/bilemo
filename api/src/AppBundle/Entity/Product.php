@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Product
@@ -16,6 +18,8 @@ use Doctrine\ORM\Mapping\DiscriminatorMap;
  * @InheritanceType("SINGLE_TABLE")
  * @DiscriminatorColumn(name="type", type="string")
  * @DiscriminatorMap({"mobile" = "Mobile"})
+ *
+ * @UniqueEntity(fields={"name"}, message="Product with same name already exists.")
  */
 abstract class Product
 {
@@ -32,6 +36,8 @@ abstract class Product
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     *
+     * @Assert\NotBlank(message = "Product name is required.")
      */
     private $name;
 
@@ -39,6 +45,8 @@ abstract class Product
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Manufacturer")
+     *
+     * @Assert\NotBlank(message = Product manufacturer is required.)
      */
     private $manufacturer;
 
@@ -46,6 +54,8 @@ abstract class Product
      * @var \DateTime
      *
      * @ORM\Column(name="dateInsert", type="datetime")
+     *
+     * @Assert\DateTime()
      */
     private $dateInsert;
 
@@ -53,6 +63,8 @@ abstract class Product
      * @var int
      *
      * @ORM\Column(name="stock", type="integer")
+     *
+     * @Assert\NotBlank(message = "Product stock is required.")
      */
     private $stock;
 
@@ -60,6 +72,10 @@ abstract class Product
      * @var string
      *
      * @ORM\OneToMany(targetEntity="Picture", mappedBy="product")
+     *
+     * @Assert\All({
+     *     @Assert\Type(Picture)
+     * })
      */
     private $pictures;
 
@@ -67,6 +83,10 @@ abstract class Product
      * @var string
      *
      * @ORM\OneToMany(targetEntity="Feature", mappedBy="product")
+     *
+     * @Assert\All({
+     *     @Assert\Type(Feature)
+     * })
      */
     private $features;
 

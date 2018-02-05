@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Feature
@@ -25,6 +26,8 @@ class Feature
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank(message = "Feature name is required.")
      */
     private $name;
 
@@ -32,6 +35,8 @@ class Feature
      * @var string
      *
      * @ORM\Column(name="value", type="string", length=255)
+     *
+     * @Assert\NotBlank(message = "Feature value is required.")
      */
     private $value;
 
@@ -39,6 +44,8 @@ class Feature
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="features")
+     *
+     * @Assert\NotBlank(message = "Linking this feature to a product is required.")
      */
     private $product;
 

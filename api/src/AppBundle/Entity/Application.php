@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
@@ -70,6 +71,8 @@ class Application implements UserInterface
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
+     *
+     * @Assert\NotBlank(message = "Application name is required.")
      */
     private $username;
 
@@ -77,6 +80,9 @@ class Application implements UserInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     *
+     * @Assert\NotBlank(message = "Application email is required.")
+     * @Assert\Email()
      */
     private $email;
 
@@ -96,6 +102,9 @@ class Application implements UserInterface
      * @var string
      *
      * @ORM\Column(name="uri", type="string", length=255)
+     *
+     * @Assert\NotBlank(message = "Application uri is required.")
+     * @Assert\Url()
      */
     private $uri;
 

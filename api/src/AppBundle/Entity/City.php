@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * City
@@ -25,6 +26,8 @@ class City
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank(message = "City name is required.")
      */
     private $name;
 
@@ -32,6 +35,8 @@ class City
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Country")
+     *
+     * @Assert\NotBlank(message = "Country is required.")
      */
     private $country;
 

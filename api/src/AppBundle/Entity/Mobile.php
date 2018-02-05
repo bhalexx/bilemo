@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
@@ -65,6 +66,8 @@ class Mobile extends Product
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Os")
+     *
+     * @Assert\NotBlank(message = "Mobile OS is required.")
      */
     private $os;
 
@@ -72,27 +75,29 @@ class Mobile extends Product
      * @var string
      *
      * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
+     *
+     * @Assert\NotBlank(message = "Mobile price is required.")
      */
     private $price;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="colorName", type="string", length=255)
+     * @ORM\Column(name="colorName", type="string", length=255, nullable = true)
      */
     private $colorName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="colorCode", type="string", length=255)
+     * @ORM\Column(name="colorCode", type="string", length=255, nullable = true)
      */
     private $colorCode;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="memory", type="integer")
+     * @ORM\Column(name="memory", type="integer", nullable = true)
      */
     private $memory;
 
