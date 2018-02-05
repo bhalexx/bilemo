@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Model\User as BaseUser;
 use Hateoas\Configuration\Annotation as Hateoas;
 
@@ -76,6 +77,8 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
+     *
+     * @Assert\NotBlank(message = "User firstname is required.")
      */
     protected $firstname;
 
@@ -83,13 +86,15 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+     *
+     * @Assert\NotBlank(message = "User lastname is required.")
      */
     protected $lastname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     protected $phone;
 
@@ -98,6 +103,10 @@ class User extends BaseUser
      *
      * @ORM\ManyToMany(targetEntity="Application")
      * @ORM\JoinTable(name="bilemo_user_application")
+     *
+     * @Assert\All({
+     *     @Assert\Type(Application)
+     * })
      */
     protected $applications;
 

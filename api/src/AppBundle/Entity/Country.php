@@ -3,12 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Country
  *
  * @ORM\Table(name="bilemo_country")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CountryRepository")
+ *
+ * @UniqueEntity(fields={"name"}, message="Country with same name already exists.")
  */
 class Country
 {
@@ -25,6 +29,8 @@ class Country
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     *
+     * @Assert\NotBlank(message = "Country name is required.")
      */
     private $name;
 
