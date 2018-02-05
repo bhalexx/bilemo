@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Os
@@ -62,6 +63,8 @@ class Os
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Since("1.0")
      */
     private $id;
 
@@ -69,6 +72,8 @@ class Os
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Serializer\Since("1.0")
      */
     private $name;
 
@@ -76,6 +81,8 @@ class Os
      * @var string
      *
      * @ORM\Column(name="version", type="string", length=255)
+     *
+     * @Serializer\Since("1.0")
      */
     private $version;
 

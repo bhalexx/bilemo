@@ -1,0 +1,608 @@
+#NelmioApiDoc Configuration
+nelmio_api_doc:
+  areas:
+    path_patterns: [^/api/doc]
+  documentation:
+    info:
+      description: |
+        Discover all Bilemo API methods you can use as a Bilemo partner.
+        Use your credentials (`clientId`, `clientSecret`, `username` & `password`) to be authorized to try all those methods out.
+        Not a Bilemo Partner? What are you waiting for? Be part of us! [Contact us](http://google.com) to talk about your project.
+      version: 1.0.0
+      title: Bilemo API
+    securityDefinitions:
+      bearerAuth:
+        type: oauth2
+        description: If you're already a Bilemo partner, use your credentials to try those methods out.
+        flow: password
+        tokenUrl: http://localhost/symfony/bilemo/api/web/app_dev.php/oauth/v2/token
+        name: Authorization
+    security:
+      - bearerAuth: []
+    tags:
+      - name: os
+        description: Everyting about Operating System
+      - name: manufacturers
+        description: Everything about manufacturers
+      - name: mobiles
+        description: Everything about mobile phones
+      - name: users
+        description: Everything about users
+    definitions:
+      Os:
+        type: object
+        properties:
+          name:
+            type: string
+          version:
+            type: string
+      GetOs:
+        allOf:
+          - $ref: "#/definitions/Os"
+        properties:
+          id:
+            type: integer
+      Manufacturer:
+        type: object
+        properties:
+          name:
+            type: string
+      GetManufacturer:
+        allOf:
+          - $ref: "#/definitions/Manufacturer"
+        properties:
+          id:
+            type: integer
+      Mobile:
+        type: object
+        properties:
+          name:
+            type: string
+          manufacturer:
+            $ref: "#/definitions/Manufacturer"
+          dateInsert:
+            type: string
+            format: date-time
+          stock:
+            type: integer
+          pictures:
+            type: array
+            items: 
+              $ref: "#/definitions/Picture"
+          features:
+            type: array
+            items: 
+              $ref: "#/definitions/Feature"
+          os:
+            $ref: "#/definitions/Os"
+          price:
+            type: number
+            format: double
+          colorName:
+            type: string
+          colorCode:
+            type: string
+          memory:
+            type: integer
+      GetMobile:
+        allOf:
+          - $ref: "#/definitions/Mobile"
+        properties:
+          id:
+            type: integer
+      Picture:
+        type: object
+        properties:
+          id:
+            type: integer
+          path:
+            type: string
+          product:
+            $ref: "#/definitions/Mobile"
+      Feature:
+        type: object
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+          value:
+            type: string
+          product:
+            $ref: "#/definitions/Mobile"
+      User:
+        type: object
+        properties:
+          firstname:
+            type: string
+          lastname:
+            type: string
+          phone:
+            type: string
+      GetUser:
+        allOf:
+          - $ref: "#/definitions/User"
+        properties:
+          id:
+            type: integer
+    paths:
+      '/api/os':
+        get:
+          tags:
+            - os
+          summary: Gets OS list
+          description: This method allows you to get OS list.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/GetOs"
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+        post:
+          tags:
+            - os
+          summary: "[BILEMO ADMIN ONLY] Adds a new OS"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to add a new OS.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "body"
+              name: "body"
+              description: "OS object that needs to be added"
+              required: true
+              schema:
+                $ref: "#/definitions/Os"
+          responses:
+            '201':
+              description: New OS created
+              schema:
+                $ref: "#/definitions/GetOs"
+            '400':
+              description: Bad request - Invalid or missing data, or an OS with the same name and version already exists.
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+      '/api/os/{id}':
+        get:
+          tags:
+            - os
+          summary: Gets details of the selected OS.
+          description: This method allows you to get the details of the selected OS.
+          consumes: 
+              - application/json
+          produces:
+            - application/json
+          parameters:
+            - name: id
+              in: path
+              description: id of the OS to return
+              required: true
+              type: integer
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/GetOs"
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '404':
+              description: The requested OS was not found.
+        put:
+          tags:
+            - os
+          summary: "[BILEMO ADMIN ONLY] Updates an existing OS"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to update an existing OS.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the OS to update
+            - in: "body"
+              name: "body"
+              description: "OS object that needs to be updated"
+              required: true
+              schema:
+                $ref: "#/definitions/Os"
+          responses:
+            '201':
+              description: OS successfully updated
+              schema:
+                $ref: "#/definitions/GetOs"
+            '400':
+              description: Bad request - Invalid or missing data, or an OS with the same name and version already exists.
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '404':
+              description: The requested OS was not found.
+        delete:
+          tags:
+            - os
+          summary: "[BILEMO ADMIN ONLY] Deletes an existing OS"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to delete an existing OS.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the OS to delete
+          responses:
+            '204':
+              description: No content - OS successfully deleted
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+      '/api/manufacturers':
+        get:
+          tags:
+            - manufacturers
+          summary: Gets manufacturers list
+          description: This method allows you to get manufacturers list.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/GetManufacturer"
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+        post:
+          tags:
+            - manufacturers
+          summary: "[BILEMO ADMIN ONLY] Adds a new manufacturer"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to add a new manufacturer.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "body"
+              name: "body"
+              description: "Manufacturer object that needs to be added"
+              required: true
+              schema:
+                $ref: "#/definitions/Manufacturer"
+          responses:
+            '201':
+              description: New manufacturer created
+              schema:
+                $ref: "#/definitions/GetManufacturer"
+            '400':
+              description: Bad request - Invalid or missing data, or a manufacturer with the same name already exists.
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+      '/api/manufacturers/{id}':
+        get:
+          tags:
+            - manufacturers
+          summary: Gets details of the selected manufacturer.
+          description: This method allows you to get the details of the selected manufacturer.
+          consumes: 
+              - application/json
+          produces:
+            - application/json
+          parameters:
+            - name: id
+              in: path
+              description: id of the manufacturer to return
+              required: true
+              type: integer
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/GetManufacturer"
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '404':
+              description: The requested manufacturer was not found.
+        put:
+          tags:
+            - manufacturers
+          summary: "[BILEMO ADMIN ONLY] Updates an existing manufacturer"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to update an existing manufacturer.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the manufacturer to update
+            - in: "body"
+              name: "body"
+              description: "Manufacturer object that needs to be updated"
+              required: true
+              schema:
+                $ref: "#/definitions/Manufacturer"
+          responses:
+            '201':
+              description: Manufacturer successfully updated
+              schema:
+                $ref: "#/definitions/GetManufacturer"
+            '400':
+              description: Bad request - Invalid or missing data, or a manufacturer with the same name already exists.
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '404':
+              description: The requested manufacturer was not found.
+        delete:
+          tags:
+            - manufacturers
+          summary: "[BILEMO ADMIN ONLY] Deletes an existing manufacturer"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to delete an existing manufacturer.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the manufacturer to delete
+          responses:
+            '204':
+              description: No content - manufacturer successfully deleted
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+      '/api/mobiles':
+        get:
+          tags:
+            - mobiles
+          summary: Gets mobiles list
+          description: This method allows you to get mobiles list.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/GetMobile"
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+        post:
+          tags:
+            - mobiles
+          summary: "[BILEMO ADMIN ONLY] Adds a new mobile"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to add a new mobile.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "body"
+              name: "body"
+              description: "Mobile object that needs to be added"
+              required: true
+              schema:
+                $ref: "#/definitions/Mobile"
+          responses:
+            '201':
+              description: New mobile created
+              schema:
+                $ref: "#/definitions/GetMobile"
+            '400':
+              description: Bad request - Invalid or missing data, or a mobile with the same name already exists.
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+      '/api/mobiles/{id}':
+        get:
+          tags:
+            - mobiles
+          summary: Gets details of the selected mobile.
+          description: This method allows you to get the details of the selected mobile.
+          consumes: 
+              - application/json
+          produces:
+            - application/json
+          parameters:
+            - name: id
+              in: path
+              description: id of mobile to return
+              required: true
+              type: integer
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/GetMobile"
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '404':
+              description: The requested mobile was not found.
+        put:
+          tags:
+            - mobiles
+          summary: "[BILEMO ADMIN ONLY] Updates an existing mobile"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to update an existing mobile.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the mobile to update
+            - in: "body"
+              name: "body"
+              description: "Mobile object that needs to be updated"
+              required: true
+              schema:
+                $ref: "#/definitions/Mobile"
+          responses:
+            '201':
+              description: Mobile successfully updated
+              schema:
+                $ref: "#/definitions/GetMobile"
+            '400':
+              description: Bad request - Invalid or missing data, or a mobile with the same name already exists.
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '404':
+              description: The requested mobile was not found.
+        delete:
+          tags:
+            - mobiles
+          summary: "[BILEMO ADMIN ONLY] Deletes an existing mobile"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to delete an existing mobile.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the mobile to delete
+          responses:
+            '204':
+              description: No content - mobile successfully deleted
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+      '/api/users':
+        get:
+          tags:
+            - users
+          summary: Gets users list
+          description: This method allows you to get users list.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/GetUser"
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+        post:
+          tags:
+            - users
+          summary: "[BILEMO ADMIN ONLY] Adds a new user"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to add a new user.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "body"
+              name: "body"
+              description: "User object that needs to be added"
+              required: true
+              schema:
+                $ref: "#/definitions/User"
+          responses:
+            '201':
+              description: New user created
+              schema:
+                $ref: "#/definitions/GetUser"
+            '400':
+              description: Bad request - Invalid or missing data.
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+      '/api/users/{id}':
+        get:
+          tags:
+            - users
+          summary: Gets details of the selected user.
+          description: This method allows you to get the details of the selected user.
+          consumes: 
+              - application/json
+          produces:
+            - application/json
+          parameters:
+            - name: id
+              in: path
+              description: id of user to return
+              required: true
+              type: integer
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/GetUser"
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '404':
+              description: The requested user was not found.
+        put:
+          tags:
+            - users
+          summary: "[BILEMO ADMIN ONLY] Updates an existing user"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to update an existing user.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the user to update
+            - in: "body"
+              name: "body"
+              description: "User object that needs to be updated"
+              required: true
+              schema:
+                $ref: "#/definitions/User"
+          responses:
+            '201':
+              description: User successfully updated
+              schema:
+                $ref: "#/definitions/GetUser"
+            '400':
+              description: Bad request - Invalid or missing data.
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '404':
+              description: The requested user was not found.
+        delete:
+          tags:
+            - users
+          summary: "[BILEMO ADMIN ONLY] Deletes an existing user"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to delete an existing user.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the user to delete
+          responses:
+            '204':
+              description: No content - user successfully deleted
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.

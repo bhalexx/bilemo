@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: nelmio_config.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -97,3 +98,6 @@ fos_oauth_server:
     auth_code_class:     AppBundle\Entity\AuthCode
     service:
         user_provider: AppBundle\Security\ApplicationProvider
+        options:
+            # access_token_lifetime: 600000
+            token_type: Bearer

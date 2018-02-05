@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Command
@@ -83,6 +84,8 @@ class Command
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Since("1.0")
      */
     private $id;
 
@@ -91,6 +94,8 @@ class Command
      *
      * @ORM\ManyToMany(targetEntity="Product")
      * @ORM\JoinTable(name="bilemo_command_product")
+     *
+     * @Serializer\Since("1.0")
      */
     private $products;
 
@@ -98,6 +103,8 @@ class Command
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="User")
+     *
+     * @Serializer\Since("1.0")
      */
     private $user;
 
@@ -105,6 +112,8 @@ class Command
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Address")
+     *
+     * @Serializer\Since("1.0")
      */
     private $deliveryAddress;
 
@@ -112,6 +121,8 @@ class Command
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
+     *
+     * @Serializer\Since("1.0")
      */
     private $createdAt;
 
@@ -119,6 +130,8 @@ class Command
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Application")
+     *
+     * @Serializer\Expose(if = "ROLE_BILEMO")
      */
     private $application;
 
