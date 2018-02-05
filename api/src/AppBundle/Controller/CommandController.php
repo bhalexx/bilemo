@@ -57,6 +57,7 @@ class CommandController extends FOSRestController
      * )
      *
      * @ParamConverter("command", converter="fos_rest.request_body")
+     *
      */
     public function createAction(Command $command)
     {
@@ -83,6 +84,7 @@ class CommandController extends FOSRestController
      * )
      *
      * @ParamConverter("newCommand", converter="fos_rest.request_body")
+     * 
      */
     public function updateAction(Command $command, Command $newCommand)
     {
