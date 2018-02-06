@@ -11,11 +11,11 @@
 		/**
 		 * @var ApplicationPasswordGenerator
 		 */
-		private $applicationPasswordGenerator;
+		private $passwordGenerator;
 
-		public function __construct(ApplicationPasswordGenerator $applicationPasswordGenerator)
+		public function __construct(ApplicationPasswordGenerator $passwordGenerator)
 		{
-			$this->applicationPasswordGenerator = $applicationPasswordGenerator;
+			$this->passwordGenerator = $passwordGenerator;
 		}
 
 		public function prePersist(LifecycleEventArgs $args)
@@ -28,6 +28,6 @@
 			}
 
 			//Generate password
-			$this->applicationPasswordGenerator->generatePassword($entity);
+			$this->passwordGenerator->generatePassword($entity);
 		}
 	}
