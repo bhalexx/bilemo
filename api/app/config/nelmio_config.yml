@@ -6,7 +6,7 @@ nelmio_api_doc:
     info:
       description: |
         Discover all Bilemo API methods you can use as a Bilemo partner.
-        Use your credentials (`clientId`, `clientSecret`, `username` & `password`) to be authorized to try all those methods out.
+        Use your credentials (`clientId`, `clientSecret`, `username` & `password`) to get authorization to try all those methods out.
         Not a Bilemo Partner? What are you waiting for? Be part of us! [Contact us](http://google.com) to talk about your project.
       version: 1.0.0
       title: Bilemo API

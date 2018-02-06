@@ -29,8 +29,25 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
+    client.mailer:
+        class: AppBundle\Services\ClientMailer
+        arguments:
+            - "@mailer"
+            - "@templating"
+
+    application.password_generator:
+        class: AppBundle\Services\ApplicationPasswordGenerator
+
+    application.doctrine_listener.on_creation:
+        class: AppBundle\DoctrineListener\ApplicationCreationListener
+        arguments:
+            - "@application.password_generator"
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+
+    client.doctrine_listener.on_creation:
+        class: AppBundle\DoctrineListener\ClientCreationListener
+        arguments:
+            - "@client.mailer"
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }

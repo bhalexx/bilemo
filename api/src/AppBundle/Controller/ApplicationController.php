@@ -8,7 +8,6 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use AppBundle\Entity\Application;
 
 class ApplicationController extends FOSRestController
@@ -58,16 +57,9 @@ class ApplicationController extends FOSRestController
      *
      * @ParamConverter("application", converter="fos_rest.request_body")
      */
-    public function createAction(Application $application, UserPasswordEncoderInterface $encoder)
+    public function createAction(Application $application)
     {
         $em = $this->getDoctrine()->getManager();
-
-        //Todo: remove this from here - create service to do this + send email with client's credentials
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        $plainPassword = substr(str_shuffle($chars), 0, 25);
-        $application->setPlainPassword($plainPassword);
-        $encoded = $encoder->encodePassword($application, $plainPassword);
-        $application->setPassword($encoded);
 
         $em->persist($application);
         $em->flush();
@@ -75,12 +67,12 @@ class ApplicationController extends FOSRestController
         $clientManager = $this->container->get('fos_oauth_server.client_manager.default');
         $client = $clientManager->createClient();
         $client->setRedirectUris(array($application->getUri()));
-        $client->setAllowedGrantTypes(array('password'));
+        $client->setAllowedGrantTypes(array('password', 'refresh_token'));
         $client->setApplication($application);
         $clientManager->updateClient($client);
 
         return $this->view(
-            [$application, $client],
+            [$client],
             Response::HTTP_CREATED,
             ['Location' => $this->generateUrl('api_application_view', ['id' => $application->getId(), UrlGeneratorInterface::ABSOLUTE_URL])]
         );
