@@ -34,8 +34,6 @@ nelmio_api_doc:
         properties:
           name:
             type: string
-          version:
-            type: string
       GetOs:
         allOf:
           - $ref: "#/definitions/Os"
@@ -166,7 +164,7 @@ nelmio_api_doc:
               schema:
                 $ref: "#/definitions/GetOs"
             '400':
-              description: Bad request - Invalid or missing data, or an OS with the same name and version already exists.
+              description: Bad request - Invalid or missing data, or an OS with the same name already exists.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
       '/api/os/{id}':
@@ -221,7 +219,7 @@ nelmio_api_doc:
               schema:
                 $ref: "#/definitions/GetOs"
             '400':
-              description: Bad request - Invalid or missing data, or an OS with the same name and version already exists.
+              description: Bad request - Invalid or missing data, or an OS with the same name already exists.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
             '404':

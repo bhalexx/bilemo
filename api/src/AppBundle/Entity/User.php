@@ -105,7 +105,7 @@ class User extends BaseUser
      * @ORM\JoinTable(name="bilemo_user_application")
      *
      * @Assert\All({
-     *     @Assert\Type(Application)
+     *     @Assert\Type("Application")
      * })
      */
     protected $applications;

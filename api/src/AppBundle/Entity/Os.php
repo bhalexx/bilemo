@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\UniqueConstraint;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as Serializer;
@@ -11,9 +11,11 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Os
  *
- * @ORM\Table(name="bilemo_os", uniqueConstraints={@UniqueConstraint(name="unique_os", columns={"name", "version"})})
+ * @ORM\Table(name="bilemo_os")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\OsRepository")
  *
+ * @UniqueEntity(fields={"name"}, message="Os with same name already exists.")
+ * 
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -81,17 +83,6 @@ class Os
      */
     private $name;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="version", type="string", length=255)
-     *
-     * @Assert\NotBlank(message = "OS version is required.")
-     *
-     * @Serializer\Since("1.0")
-     */
-    private $version;
-
 
     /**
      * Get id
@@ -125,30 +116,6 @@ class Os
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set version
-     *
-     * @param string $version
-     *
-     * @return Os
-     */
-    public function setVersion($version)
-    {
-        $this->version = $version;
-
-        return $this;
-    }
-
-    /**
-     * Get version
-     *
-     * @return string
-     */
-    public function getVersion()
-    {
-        return $this->version;
     }
 }
 

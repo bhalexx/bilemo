@@ -20,10 +20,10 @@
 		public function generatePassword(Application $application)
 		{
 			$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	        $plainPassword = substr(str_shuffle($chars), 0, 25);
+			$plainPassword = $application->getPlainPassword() ?: substr(str_shuffle($chars), 0, 25);
 	        $fullPlainPassword = $application->getUsername()."_".$plainPassword;
 	        $encoded = $this->encoder->encodePassword($application, $fullPlainPassword);
 	        $application->setPlainPassword($fullPlainPassword);
-	        $application->setPassword($encoded);
+	        $application->setPassword($encoded);	
 		}
 	}

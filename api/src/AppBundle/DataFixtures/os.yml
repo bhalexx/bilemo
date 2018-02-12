@@ -1,0 +1,6 @@
+os_1:
+  name: iOS
+os_2:
+  name: Android
+os_3:
+  name: Windows Phone

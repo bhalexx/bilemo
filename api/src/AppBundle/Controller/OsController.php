@@ -91,7 +91,6 @@ class OsController extends FOSRestController
     public function updateAction(Os $os, Os $newOs)
     {
         $os->setName($newOs->getName());
-        $os->setVersion($newOs->getVersion());
         $this->getDoctrine()->getManager()->flush();
 
         return $os;
