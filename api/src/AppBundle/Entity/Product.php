@@ -44,9 +44,10 @@ abstract class Product
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Manufacturer")
+     * @ORM\ManyToOne(targetEntity="Manufacturer", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
      *
-     * @Assert\NotBlank(message = Product manufacturer is required.)
+     * @Assert\NotBlank(message="Product manufacturer is required.")
      */
     private $manufacturer;
 
@@ -64,17 +65,18 @@ abstract class Product
      *
      * @ORM\Column(name="stock", type="integer")
      *
-     * @Assert\NotBlank(message = "Product stock is required.")
+     * @Assert\NotBlank(message="Product stock is required.")
      */
     private $stock;
 
     /**
      * @var string
      *
-     * @ORM\OneToMany(targetEntity="Picture", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="product", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      *
      * @Assert\All({
-     *     @Assert\Type(Picture)
+     *     @Assert\Type("Picture")
      * })
      */
     private $pictures;
@@ -82,10 +84,11 @@ abstract class Product
     /**
      * @var string
      *
-     * @ORM\OneToMany(targetEntity="Feature", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Feature", mappedBy="product", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      *
      * @Assert\All({
-     *     @Assert\Type(Feature)
+     *     @Assert\Type("Feature")
      * })
      */
     private $features;
@@ -212,6 +215,7 @@ abstract class Product
      */
     public function addPicture(Picture $picture)
     {
+        $picture->setProduct($this);
         $this->pictures[] = $picture;
         return $this;
     }
@@ -245,6 +249,7 @@ abstract class Product
      */
     public function addFeature(Feature $feature)
     {
+        $feature->setProduct($this);
         $this->features[] = $feature;
         return $this;
     }

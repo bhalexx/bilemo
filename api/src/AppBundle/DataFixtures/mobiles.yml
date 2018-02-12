@@ -1,0 +1,66 @@
+mobile_1:
+  name: iPhone SE
+  manufacturer: Apple
+  os: iOS
+  features:
+    - name: "Écran"
+      value: "4 pouces"
+    - name: "Largeur de l'écran"
+      value: "640 pixels"
+    - name: "Hauteur de l'écran"
+      value: "1136 pixels"      
+    - name: "Appareil photo"
+      value: "12 Mpx"  
+  models:
+    - price: 359.00
+      colorName: Argent
+      colorCode: CCCCCC
+      memory: 32
+      stock: 100
+      picturesFolder: "iphone_se/argent/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+    - price: 419.00
+      colorName: Or
+      colorCode: C5AE87
+      memory: 128
+      stock: 50
+      picturesFolder: "iphone_se/or/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+    - price: 395.00
+      colorName: Or rose
+      colorCode: D3AAA5
+      memory: 64
+      stock: 87
+      picturesFolder: "iphone_se/or_rose/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+    - price: 395.00
+      colorName: Gris sidéral
+      colorCode: A5ADB0
+      memory: 64
+      stock: 90
+      picturesFolder: "iphone_se/gris_sideral/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+mobile_2:
+  name: iPhone X
+  manufacturer: Apple
+  os: iOS
+  features:
+    - name: "Multiple SIM"
+      value: "Non"
+    - name: "Batterie amovible"
+      value: "Non"
+  models:
+    - price: 1129.00
+      colorName: Argent
+      colorCode: CCCCCC
+      memory: 64
+      stock: 15
+      picturesFolder: "iphone_x/argent/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+    - price: 1299.00
+      colorName: Gris sidéral
+      colorCode: A5ADB0
+      memory: 256
+      stock: 15
+      picturesFolder: "iphone_x/gris_sideral/"
+      pictures: [ "1.png", "2.png", "3.png" ]

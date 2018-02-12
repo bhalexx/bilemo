@@ -1,0 +1,11 @@
+application_1:
+  email: contact@bilemo.com
+  roles: [ROLE_BILEMO]
+  uri: http://bilemo.com
+  username: Bilemo
+  password: password
+application_2:
+  email: contact@openmobilerooms.com
+  roles: [ROLE_APPLICATION]
+  uri: http://openmobilerooms.com
+  username: OpenMobileRooms
