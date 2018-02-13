@@ -21,7 +21,7 @@
 		{
 			$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 			$plainPassword = $application->getPlainPassword() ?: substr(str_shuffle($chars), 0, 25);
-	        $fullPlainPassword = $application->getUsername()."_".$plainPassword;
+	        $fullPlainPassword = $application->getPlainPassword() ?: $application->getUsername()."_".$plainPassword;
 	        $encoded = $this->encoder->encodePassword($application, $fullPlainPassword);
 	        $application->setPlainPassword($fullPlainPassword);
 	        $application->setPassword($encoded);	

@@ -2,11 +2,13 @@
 
 	namespace AppBundle\Command;
 
-	use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+	use Symfony\Component\Console\Command\Command;
 	use Symfony\Component\Console\Input\InputInterface;
 	use Symfony\Component\Console\Input\ArrayInput;
 	use Symfony\Component\Console\Output\OutputInterface;
 	use Symfony\Component\Yaml\Yaml;
+	use Doctrine\ORM\EntityManagerInterface;
+	use FOS\OAuthServerBundle\Entity\ClientManager;
 	use AppBundle\Entity\Os;
 	use AppBundle\Entity\Manufacturer;
 	use AppBundle\Entity\Application;
@@ -14,11 +16,20 @@
 	use AppBundle\Entity\Feature;
 	use AppBundle\Entity\Picture;
 
-	class LoadFixturesCommand extends ContainerAwareCommand
+	class LoadFixturesCommand extends Command
 	{
 		private $em;
+		private $clientManager;
 		private $picturesFixtures = __DIR__.'/../DataFixtures/Pictures/';
 		private $picturesDestination = __DIR__.'/../../../web/uploads';
+
+		public function __construct(EntityManagerInterface $em, ClientManager $clientManager)
+		{
+			parent::__construct();
+
+			$this->em = $em;
+			$this->clientManager = $clientManager;
+		}
 
 		protected function configure()
 		{
@@ -34,8 +45,6 @@
 
 		protected function execute(InputInterface $input, OutputInterface $output)
 		{
-			$this->em = $this->getContainer()->get('doctrine')->getManager();
-
 			$application = $this->getApplication();
         	$application->setAutoExit(false);
 
@@ -84,7 +93,7 @@
 	        ]);
 
 	        //Load & create fixtures from YAML file
-	        $this->loadFixtures($output);
+	        $this->loadFixtures();
 
   			//Feedback end
 	        $output->writeln([
@@ -98,9 +107,8 @@
 
 		/**
 		 * Loads fixtures
-		 * @param  OutputInterface $output
 		 */
-		public function loadFixtures(OutputInterface $output)
+		public function loadFixtures()
 		{
 			$kernel = $this->getApplication()->getKernel();
 
@@ -125,12 +133,11 @@
 				
 				$this->em->persist($application);
 				
-				$clientManager = $this->getContainer()->get('fos_oauth_server.client_manager.default');
-		        $client = $clientManager->createClient();
+		        $client = $this->clientManager->createClient();
 		        $client->setRedirectUris(array($application->getUri()));
 		        $client->setAllowedGrantTypes(array('password', 'refresh_token'));
 		        $client->setApplication($application);
-		        $clientManager->updateClient($client);				
+		        $this->clientManager->updateClient($client);				
 			}
 
 			//Browse OS fixtures
