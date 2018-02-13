@@ -35,6 +35,13 @@ services:
             - "@mailer"
             - "@templating"
 
+    client.doctrine_listener.on_creation:
+        class: AppBundle\DoctrineListener\ClientCreationListener
+        arguments:
+            - "@client.mailer"
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+
     application.password_generator:
         class: AppBundle\Services\ApplicationPasswordGenerator
 
@@ -44,10 +51,25 @@ services:
             - "@application.password_generator"
         tags:
             - { name: doctrine.event_listener, event: prePersist }
+    
+    # alias to allow this type to be autowired
+    FOS\OAuthServerBundle\Entity\ClientManager: '@fos_oauth_server.client_manager.default'
 
-    client.doctrine_listener.on_creation:
-        class: AppBundle\DoctrineListener\ClientCreationListener
+    command.fixtures.load:
+        class: AppBundle\Command\LoadFixturesCommand
         arguments:
-            - "@client.mailer"
+            - '@doctrine.orm.entity_manager'
         tags:
-            - { name: doctrine.event_listener, event: postPersist }
+            -  { name: console.command }
+
+    command.application.create:
+        class: AppBundle\Command\CreatePartnerCommand
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            -  { name: console.command }
+
+    test.common.userservice:
+        class:  Tests\AppBundle\Controller\SetupTest
+        arguments:
+            - '@doctrine.orm.entity_manager'

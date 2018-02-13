@@ -27,7 +27,7 @@
 	            "client_secret" => $bilemo->getSecret(),
 	            "grant_type" 	=> "password",
 	            "username" 		=> $bilemoApplication->getUsername(),
-	            "password" 		=> 'Bilemo_password'
+	            "password" 		=> 'password'
 	        ];	 
 
 			$this->client->request('GET', '/oauth/v2/token', $oauthHeaders);

@@ -15,7 +15,7 @@ nelmio_api_doc:
         type: oauth2
         description: If you're already a Bilemo partner, use your credentials to try those methods out.
         flow: password
-        tokenUrl: http://localhost/symfony/bilemo/api/web/app_dev.php/oauth/v2/token
+        tokenUrl: '%root.uri%/oauth/v2/token'
         name: Authorization
     security:
       - bearerAuth: []
