@@ -10,4 +10,5 @@ env:
 script:
   - cd api
   - composer install
+  - php bin/console doctrine:schema:create --env=test
   - php bin/phpunit
