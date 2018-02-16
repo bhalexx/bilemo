@@ -3,15 +3,14 @@ language: php
 php:
   - '7.0.10'
 
+env:
+  - MYSQL_HOST=127.0.0.1 MYSQL_USER=root
+
 services:
   - mysql
-  
-# env:
-#   global:
-#     - LC_ALL=en_US.UTF-8
 
 script:
   - cd api
   - composer install
-  - php bin/console doctrine:schema:create --env=test
+  - php bin/console bilemo:fixtures:load
   - php vendor/bin/phpunit
