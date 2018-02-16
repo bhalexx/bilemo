@@ -59,12 +59,11 @@
 	        //Save FOSOAuth client
 	        $this->clientManager->updateClient($client);
 
-	        $output->writeln("");
-	        $output->writeln("Client credentials");
-	        $output->writeln("==================");
-	        $output->writeln("");
-
 	        $output->writeln(array(
+	        	"",
+	        	"Client credentials",
+	        	"==================",
+	        	"",	        
 	        	sprintf("username: <comment>%s</comment>", $application->getUsername()),
 	        	sprintf("password: <comment>%s</comment>", $application->getPlainPassword()),
 	        	sprintf("client_id: <comment>%s</comment>", $client->getPublicId()),

@@ -22,6 +22,7 @@
 		private $clientManager;
 		private $picturesFixtures = __DIR__.'/../DataFixtures/Pictures/';
 		private $picturesDestination = __DIR__.'/../../../web/uploads';
+		private $application;
 
 		public function __construct(EntityManagerInterface $em, ClientManager $clientManager)
 		{
@@ -45,64 +46,70 @@
 
 		protected function execute(InputInterface $input, OutputInterface $output)
 		{
-			$application = $this->getApplication();
-        	$application->setAutoExit(false);
+			$this->application = $this->getApplication();
+        	$this->application->setAutoExit(false);
 
         	// Drop database
         	$output->writeln([
-	            '===================================================',
 	            'Dropping database',
-	            '===================================================',
+	            '==================',
 	            '',
 	        ]);
-
-        	$options = array('command' => 'doctrine:database:drop', '--force' => true);
-        	$application->run(new ArrayInput($options));
+        	$this->dropDatabase();        	
 
         	// Prepare database environment
         	$output->writeln([
-	            '',
-	            '===================================================',
 	            'Create database',
-	            '===================================================',
+	            '================',
 	            '',
 	        ]);
-
-       		$options = array('command' => 'doctrine:database:create', '--if-not-exists' => true);	        
-        	$application->run(new ArrayInput($options));
+       		$this->createDatabase();
 
         	// Create database schema
         	$output->writeln([
-        		'',
-	            '===================================================',
 	            'Create database schema',
-	            '===================================================',
+	            '=======================',
 	            '',
 	        ]);
-
-       		$options = array('command' => 'doctrine:schema:create');	        	
-	        $application->run(new ArrayInput($options));
+       		$this->createDatabaseSchema();
 
 	        //Load fixtures
 	        $output->writeln([
-	            '',
-	            '===================================================',
 	            'Load fixtures',
-	            '===================================================',
+	            '==============',
 	            '',
 	        ]);
-
-	        //Load & create fixtures from YAML file
 	        $this->loadFixtures();
 
   			//Feedback end
-	        $output->writeln([
-	            '',
-	            'Everything was successfully loaded.',
-	            '',
-	            '===================================================',
-	            ''
-	        ]);
+	        $output->writeln('Everything was successfully loaded.');
+		}
+
+		/**
+		 * Executes command to drop database
+		 */
+		private function dropDatabase()
+		{
+			$options = array('command' => 'doctrine:database:drop', '--force' => true);
+        	$this->application->run(new ArrayInput($options));
+		}
+
+		/**
+		 * Executes command to create database
+		 */
+		private function createDatabase()
+		{
+			$options = array('command' => 'doctrine:database:create', '--if-not-exists' => true);	        
+        	$this->application->run(new ArrayInput($options));
+		}
+
+		/**
+		 * Executes command to create database schema
+		 */
+		private function createDatabaseSchema()
+		{
+			$options = array('command' => 'doctrine:schema:create');	        	
+	        $this->application->run(new ArrayInput($options));
 		}
 
 		/**
@@ -119,6 +126,28 @@
 			$mobiles = Yaml::parse(file_get_contents($kernel->locateResource('@AppBundle/DataFixtures/mobiles.yml'), true));
 
 			//Browse applications fixtures
+			$this->loadApplications($applications);
+
+			//Browse OS fixtures
+			$this->loadOss($oss);
+			
+			//Browse manufacturers fixtures
+			$this->loadManufacturers($manufacturers);			
+
+			$this->em->flush();
+
+			//Browse mobiles fixtures
+			$this->loadMobiles($mobiles);
+
+			$this->em->flush();
+		}
+
+		/**
+		 * Loads applications
+		 * @param array $applications
+		 */
+		private function loadApplications($applications)
+		{
 			foreach ($applications as $data) {
 				$application = new Application();
 				$application
@@ -139,26 +168,42 @@
 		        $client->setApplication($application);
 		        $this->clientManager->updateClient($client);				
 			}
+		}
 
-			//Browse OS fixtures
+		/**
+		 * Loads OS
+		 * @param array $oss
+		 */
+		private function loadOss($oss)
+		{
 			foreach ($oss as $data) {
 				$os = new Os();
 				$os->setName($data['name']);
 
 				$this->em->persist($os);				
 			}
+		}
 
-			//Browse manufacturers fixtures
+		/**
+		 * Loads manufacturers
+		 * @param array $manufacturers
+		 */
+		private function loadManufacturers($manufacturers)
+		{
 			foreach ($manufacturers as $data) {
 				$manufacturer = new Manufacturer();
 				$manufacturer->setName($data['name']);
 
 				$this->em->persist($manufacturer);				
 			}
+		}
 
-			$this->em->flush();
-
-			//Browse mobiles fixtures
+		/**
+		 * Loads mobiles
+		 * @param array $mobiles
+		 */
+		private function loadMobiles($mobiles)
+		{
 			foreach ($mobiles as $data) {
 				foreach ($data['models'] as $model) {
 					$mobile = new Mobile();
@@ -172,32 +217,52 @@
 						->setMemory($model['memory'])
 						->setStock($model['stock']);
 
-					foreach ($data['features'] as $featureData) {
-						$feature = new Feature();
-						$feature
-							->setName($featureData['name'])
-							->setValue($featureData['value']);
+					//Add features to mobile
+					$this->addFeatures($mobile, $data['features']);
 
-						$mobile->addFeature($feature);
-					}
+					//Add pictures to mobile
+					$this->addPictures($mobile, $model);
 
-					//Upload mobile's pictures
-					$folder = $this->picturesFixtures.'/'.$model['picturesFolder'];
-					$handle = opendir($folder);
-
-					while(($file = readdir($handle)) !== false) {
-		                if ($file != '.' && $file != '..'){
-		                	$picture = $this->uploadPicture($file, $folder);
-
-		                    $mobile->addPicture($picture);
-		                }
-		            }
-
-		            $this->em->persist($mobile);
+					$this->em->persist($mobile);
 				}				
 			}
+		}
 
-			$this->em->flush();
+		/**
+		 * Adds features to mobile
+		 * @param Mobile $mobile
+		 * @param array $features
+		 */
+		private function addFeatures($mobile, $features)
+		{
+			foreach ($features as $featureData) {
+				$feature = new Feature();
+				$feature
+					->setName($featureData['name'])
+					->setValue($featureData['value']);
+
+				$mobile->addFeature($feature);
+			}
+		}
+
+		/**
+		 * Adds pictures to mobile
+		 * @param Mobile $mobile
+		 * @param array $pictures
+		 */
+		private function addPictures($mobile, $model)
+		{
+			$folder = $this->picturesFixtures.'/'.$model['picturesFolder'];
+			$handle = opendir($folder);
+
+			while(($file = readdir($handle)) !== false) {
+                if ($file != '.' && $file != '..'){
+					//Upload mobile's pictures
+                	$picture = $this->uploadPicture($file, $folder);
+
+                    $mobile->addPicture($picture);
+                }
+            }
 		}
 
 		/**
