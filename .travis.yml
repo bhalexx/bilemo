@@ -1,0 +1,13 @@
+language: php
+# sudo: false
+php:
+  - '7.0.10'
+
+env:
+  global:
+    - LC_ALL=en_US.UTF-8
+
+script:
+  - cd api
+  - composer install
+  - php bin/phpunit
