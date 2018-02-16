@@ -16,3 +16,5 @@
 	// Load fixtures
 	$options = array('command' => 'bilemo:fixtures:load');
 	$application->run(new ArrayInput($options));
+
+	dump('here we are');

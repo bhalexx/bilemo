@@ -1,0 +1,17 @@
+language: php
+sudo: false
+php:
+  - '7.0.10'
+
+services:
+  - mysql
+
+env:
+  - SYMFONY_VERSION="3.4.*" DB=mysql
+
+install:
+  - cd api
+  - composer install
+
+script:
+  - php vendor/bin/phpunit
