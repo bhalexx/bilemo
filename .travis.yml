@@ -3,12 +3,15 @@ language: php
 php:
   - '7.0.10'
 
-env:
-  global:
-    - LC_ALL=en_US.UTF-8
+services:
+  - mysql
+  
+# env:
+#   global:
+#     - LC_ALL=en_US.UTF-8
 
 script:
   - cd api
   - composer install
   - php bin/console doctrine:schema:create --env=test
-  - php bin/phpunit
+  - php vendor/bin/phpunit
