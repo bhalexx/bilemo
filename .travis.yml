@@ -12,5 +12,4 @@ services:
 script:
   - cd api
   - composer install
-  - php bin/console bilemo:fixtures:load
   - php vendor/bin/phpunit
