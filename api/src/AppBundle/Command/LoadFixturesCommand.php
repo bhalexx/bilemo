@@ -53,7 +53,6 @@
         	$output->writeln([
 	            'Dropping database',
 	            '==================',
-	            '',
 	        ]);
         	$this->dropDatabase();        	
 
@@ -61,7 +60,6 @@
         	$output->writeln([
 	            'Create database',
 	            '================',
-	            '',
 	        ]);
        		$this->createDatabase();
 
@@ -69,7 +67,6 @@
         	$output->writeln([
 	            'Create database schema',
 	            '=======================',
-	            '',
 	        ]);
        		$this->createDatabaseSchema();
 
@@ -77,7 +74,6 @@
 	        $output->writeln([
 	            'Load fixtures',
 	            '==============',
-	            '',
 	        ]);
 	        $this->loadFixtures();
 
@@ -129,16 +125,18 @@
 			$this->loadApplications($applications);
 
 			//Browse OS fixtures
-			$this->loadOss($oss);
-			
-			//Browse manufacturers fixtures
-			$this->loadManufacturers($manufacturers);			
+			$this->loadOss($oss);			
 
+			//Browse manufacturers fixtures
+			$this->loadManufacturers($manufacturers);
+
+			//Need to flush to be able to link oss and manufacturers to mobiles
 			$this->em->flush();
 
 			//Browse mobiles fixtures
 			$this->loadMobiles($mobiles);
-
+			
+			//Flush
 			$this->em->flush();
 		}
 
@@ -280,6 +278,10 @@
 	        $picture = new Picture();
 	        //Set path with new filename
 	        $picture->setPath($newName);
+	        //Create folder if not exist
+	        if(!is_dir($this->picturesDestination)){
+			    mkdir($this->picturesDestination, 0777);
+			}
 	        //Copy file in folder
 	        copy($folder.'/'.$file, $this->picturesDestination.'/'.$picture->getPath());
 	        
