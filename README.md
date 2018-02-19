@@ -12,4 +12,4 @@ REST API for mobile phones websites - 7th OCR PHP/Symfony project
 This is the repository of Bilemo API.
 You will find project diagrams in "diagrams" folder.
 
-**Open "api" folder to read instructions to use Bilemo API as a partner.**
+**Open [api folder](https://github.com/bhalexx/bilemo/tree/master/api) to read instructions to use Bilemo API as a partner.**

@@ -50,31 +50,19 @@
         	$this->application->setAutoExit(false);
 
         	// Drop database
-        	$output->writeln([
-	            'Dropping database',
-	            '==================',
-	        ]);
+        	$output->writeln('Dropping database');
         	$this->dropDatabase();        	
 
         	// Prepare database environment
-        	$output->writeln([
-	            'Create database',
-	            '================',
-	        ]);
+        	$output->writeln('Create database');
        		$this->createDatabase();
 
         	// Create database schema
-        	$output->writeln([
-	            'Create database schema',
-	            '=======================',
-	        ]);
+        	$output->writeln('Create database schema');
        		$this->createDatabaseSchema();
 
 	        //Load fixtures
-	        $output->writeln([
-	            'Load fixtures',
-	            '==============',
-	        ]);
+	        $output->writeln('Load fixtures');
 	        $this->loadFixtures();
 
   			//Feedback end
@@ -135,7 +123,7 @@
 
 			//Browse mobiles fixtures
 			$this->loadMobiles($mobiles);
-			
+
 			//Flush
 			$this->em->flush();
 		}
