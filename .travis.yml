@@ -6,8 +6,8 @@ php:
 services:
   - mysql
 
-env:
-  - SYMFONY_VERSION="3.4.*" DB=mysql
+# env:
+#   - SYMFONY_VERSION="3.4.*" DB=mysql
 
 install:
   - cd api
