@@ -7,6 +7,24 @@
 
 	class ManufacturerControllerTest extends WebTestCase
 	{
+		protected $client;
+		protected $container;
+		protected $em;
+
+		protected function setUp()
+		{
+			$this->client = static::createClient(); 
+			$this->container = $this->client->getContainer();
+	        $this->em = $this->container->get('doctrine')->getManager();	        
+		}
+
+		protected function tearDown()
+		{
+			$this->client = null;
+			$this->container = null;
+			$this->em = null;
+		}
+
 		public function testGetManufacturerListWithoutToken()
 	    {
 	        $this->client->request('GET', '/api/manufacturers');
