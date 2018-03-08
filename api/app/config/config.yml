@@ -100,5 +100,5 @@ fos_oauth_server:
     service:
         user_provider: AppBundle\Security\ApplicationProvider
         options:
-            # access_token_lifetime: 600000
+            access_token_lifetime: 600000
             token_type: Bearer
