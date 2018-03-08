@@ -1,17 +1,12 @@
 language: php
 sudo: false
 php:
-  - '7.0.10'
-
-services:
-  - mysql
-
-env:
-  - SYMFONY_VERSION="3.4.*" DB=mysql
+  - '7.2.3'
 
 install:
   - cd api
   - composer install
-
-script:
-  - php vendor/bin/phpunit
+  # - php bin/console doctrine:database:create
+  # - php bin/console doctrine:schema:create
+  - php bin/console doctrine:database:create --env=test
+  - php bin/console doctrine:schema:create --env=test

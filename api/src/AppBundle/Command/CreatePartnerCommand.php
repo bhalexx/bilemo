@@ -60,15 +60,12 @@
 	        $this->clientManager->updateClient($client);
 
 	        $output->writeln(array(
-	        	"",
 	        	"Client credentials",
 	        	"==================",
-	        	"",	        
 	        	sprintf("username: <comment>%s</comment>", $application->getUsername()),
 	        	sprintf("password: <comment>%s</comment>", $application->getPlainPassword()),
 	        	sprintf("client_id: <comment>%s</comment>", $client->getPublicId()),
-	        	sprintf("client_secret: <comment>%s</comment>", $client->getSecret()),
-	        	""
+	        	sprintf("client_secret: <comment>%s</comment>", $client->getSecret())
 	        ));
 
 	        return 0;
