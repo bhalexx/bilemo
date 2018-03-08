@@ -6,7 +6,8 @@ This API was built with **Symfony 3.4**.
 It's the 7th [OpenClassRooms](https://openclassrooms.com/) PHP/Symfony Developer project.
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c42fc2dbed964964985ca34c03c99d7c)](https://www.codacy.com/app/bhalexx/bilemo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bhalexx/bilemo&amp;utm_campaign=Badge_Grade) 
-[![Maintainability](https://api.codeclimate.com/v1/badges/7669fe651a7626557f7e/maintainability)](https://codeclimate.com/github/bhalexx/bilemo/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7669fe651a7626557f7e/maintainability)](https://codeclimate.com/github/bhalexx/bilemo/maintainability) 
+[![Build Status](https://travis-ci.org/bhalexx/bilemo.svg?branch=master)](https://travis-ci.org/bhalexx/bilemo)
 
 ---
 
