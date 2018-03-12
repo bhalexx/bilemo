@@ -78,6 +78,7 @@ fos_rest:
     view:
         view_response_listener: 'force'
         formats: { json: true, xml: false, rss: false }
+    param_fetcher_listener: 'force'
     serializer:
         serialize_null: true
 
