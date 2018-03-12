@@ -79,7 +79,7 @@ abstract class Product
      *     @Assert\Type("Picture")
      * })
      */
-    private $pictures;
+    private $pictures;  
 
     /**
      * @var string

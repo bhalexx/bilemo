@@ -41,4 +41,6 @@ monolog:
 #    delivery_addresses: ['me@example.com']
 
 parameters:
-    root.uri: http://localhost/symfony/bilemo/api/web/app_dev.php
+    root: http://localhost/symfony/bilemo/api
+    root_uri: '%root%/web/app_dev.php'
+    picture_path: '%root%/web/uploads/'

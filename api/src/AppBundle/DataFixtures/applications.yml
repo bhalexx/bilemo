@@ -9,3 +9,4 @@ application_2:
   roles: [ROLE_APPLICATION]
   uri: http://openmobilerooms.com
   username: OpenMobileRooms
+  password: password
