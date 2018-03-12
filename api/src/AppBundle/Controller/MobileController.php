@@ -58,7 +58,7 @@ class MobileController extends FOSRestController
             $paramFetcher->get('offset')
         );
 
-        return new Mobiles($pager);
+        return new Mobiles($pager, $this->container->getParameter('picture_path'));
 
         // $em = $this->getDoctrine()->getManager();
 

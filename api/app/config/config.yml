@@ -8,7 +8,8 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    root.uri: http://bilemo.bhalexx.me    
+    root_uri: http://bilemo.bhalexx.me
+    picture_path: '%root_uri%/web/uploads/'
 
 framework:
     #esi: ~
