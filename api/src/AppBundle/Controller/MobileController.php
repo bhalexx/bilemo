@@ -25,6 +25,13 @@ class MobileController extends FOSRestController
      *     nullable = true,
      *     description = "The keyword to search for."
      * )
+     *
+     * @Rest\QueryParam(
+     *     name = "manufacturer",
+     *     requirements = "\d+",
+     *     nullable = true,
+     *     description = "The manufacturer to search for."
+     * )
      * 
      * @Rest\QueryParam(
      *     name = "order",
@@ -53,6 +60,7 @@ class MobileController extends FOSRestController
     {
         $pager = $this->getDoctrine()->getRepository('AppBundle:Mobile')->search(
             $paramFetcher->get('keyword'),
+            $paramFetcher->get('manufacturer'),
             $paramFetcher->get('order'),
             $paramFetcher->get('limit'),
             $paramFetcher->get('offset')
