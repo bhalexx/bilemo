@@ -59,12 +59,6 @@ class MobileController extends FOSRestController
         );
 
         return new Mobiles($pager, $this->container->getParameter('picture_path'));
-
-        // $em = $this->getDoctrine()->getManager();
-
-        // $mobilesList = $em->getRepository('AppBundle:Mobile')->findAll();
-
-        // return $mobilesList;
     }
 
     /**
