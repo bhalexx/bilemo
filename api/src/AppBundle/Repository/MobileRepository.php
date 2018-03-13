@@ -2,8 +2,6 @@
 
 namespace AppBundle\Repository;
 
-use AppBundle\Entity\Manufacturer;
-
 /**
  * MobileRepository
  *
@@ -12,23 +10,19 @@ use AppBundle\Entity\Manufacturer;
  */
 class MobileRepository extends AbstractRepository
 {
-    public function search($term, Manufacturer $manufacturer = null, $order = 'asc', $limit = 20, $offset = 0)
+    public function search($manufacturerId = null, $order = 'asc', $limit = 20, $offset = 0)
     {
         $qb = $this
             ->createQueryBuilder('m')
             ->select('m')
             ->orderBy('m.name', $order)
         ;
-        
-        if ($term) {
-            $qb
-                ->where('m.name LIKE ?1')
-                ->setParameter(1, '%'.$term.'%')
-            ;
-        }
 
-        if ($manufacturer) {
-
+        if ($manufacturerId) {
+        	$qb
+        		->where('m.manufacturer = :manufacturerId')
+	            ->setParameter('manufacturerId', $manufacturerId)
+			;
         }
         
         return $this->paginate($qb, $limit, $offset);
