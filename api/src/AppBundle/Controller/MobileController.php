@@ -74,6 +74,10 @@ class MobileController extends FOSRestController
      */
     public function viewAction(Mobile $mobile)
     {
+        //Edit mobile pictures path
+        foreach ($mobile->getPictures() as $picture) {
+            $picture->setPath($this->container->getParameter('picture_path').$picture->getPath());
+        }
         return $mobile;
     }
 
