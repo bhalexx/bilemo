@@ -18,12 +18,12 @@ class MobileController extends FOSRestController
      *     path = "/api/mobiles",
      *     name = "api_mobile_list"
      * )
-     *
+     *     *
      * @Rest\QueryParam(
-     *     name = "keyword",
-     *     requirements = "[a-zA-Z0-9]",
+     *     name = "manufacturer",
+     *     requirements = "\d+",
      *     nullable = true,
-     *     description = "The keyword to search for."
+     *     description = "The manufacturer to search for."
      * )
      * 
      * @Rest\QueryParam(
@@ -52,7 +52,7 @@ class MobileController extends FOSRestController
     public function listAction(ParamFetcherInterface $paramFetcher)
     {
         $pager = $this->getDoctrine()->getRepository('AppBundle:Mobile')->search(
-            $paramFetcher->get('keyword'),
+            $paramFetcher->get('manufacturer'),
             $paramFetcher->get('order'),
             $paramFetcher->get('limit'),
             $paramFetcher->get('offset')
