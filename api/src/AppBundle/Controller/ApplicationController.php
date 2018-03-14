@@ -92,9 +92,10 @@ class ApplicationController extends FOSRestController
      */
     public function updateAction(Application $application, Application $newApplication)
     {
-        $application->setName($newApplication->getName());
+        $application->setUserName($newApplication->getUserName());
         $application->setEmail($newApplication->getEmail());
         $application->setUri($newApplication->getUri());
+        $application->setRoles($newApplication->getRoles());
         $this->getDoctrine()->getManager()->flush();
 
         return $application;
@@ -114,8 +115,12 @@ class ApplicationController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $application = $em->getRepository('AppBundle:Application')->findOneById($id);
+        // Get associated client
+        $client = $em->getRepository('AppBundle:Client')->findOneByApplication($application);
 
-        if ($application) {
+        if ($application && $client) {
+            // Remove client first then application
+            $em->remove($client);
             $em->remove($application);
             $em->flush();
         }
