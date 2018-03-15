@@ -223,4 +223,3 @@ class Mobile extends Product
         return $this->memory;
     }
 }
-
