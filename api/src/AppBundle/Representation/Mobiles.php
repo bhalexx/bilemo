@@ -15,13 +15,6 @@ class Mobiles
     
     public function __construct(Pagerfanta $data, $picturePath)
     {
-        //Edit mobile pictures path
-        foreach ($data as $mobile) {
-            foreach ($mobile->getPictures() as $picture) {
-                $picture->setPath($picturePath.$picture->getPath());
-            }
-        }
-
         $this->data = $data;
         
         $this->addMeta('limit', $data->getMaxPerPage());
