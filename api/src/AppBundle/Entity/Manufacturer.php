@@ -116,4 +116,3 @@ class Manufacturer
         return $this->name;
     }
 }
-

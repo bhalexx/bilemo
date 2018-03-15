@@ -274,4 +274,3 @@ abstract class Product
         return $this->features;
     }
 }
-
