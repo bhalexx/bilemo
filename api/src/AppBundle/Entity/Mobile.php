@@ -65,7 +65,7 @@ class Mobile extends Product
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Os", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Os", cascade={"persist"})
      * @ORM\JoinColumn(onDelete="SET NULL")
      *
      * @Assert\NotBlank(message = "Mobile OS is required.")
@@ -101,7 +101,6 @@ class Mobile extends Product
      * @ORM\Column(name="memory", type="integer", nullable = true)
      */
     private $memory;
-
 
     /**
      * Set os
