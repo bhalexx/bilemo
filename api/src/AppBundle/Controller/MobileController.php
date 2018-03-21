@@ -123,7 +123,7 @@ class MobileController extends FOSRestController
         $mobile->setPrice($newMobile->getPrice());
         $mobile->setColorName($newMobile->getColorName());
         $mobile->setColorCode($newMobile->getColorCode());
-        $mobile->setMemory($newMobile->setMemory());
+        $mobile->setMemory($newMobile->getMemory());
 
         $this->getDoctrine()->getManager()->flush();
 

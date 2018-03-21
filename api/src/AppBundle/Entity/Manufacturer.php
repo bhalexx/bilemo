@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -12,6 +13,8 @@ use JMS\Serializer\Annotation as Serializer;
  *
  * @ORM\Table(name="bilemo_manufacturer")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ManufacturerRepository")
+ *
+ * @UniqueEntity(fields={"name"}, message="Manufacturer with same name already exists.")
  *
  * @Hateoas\Relation(
  *      "self",
@@ -70,7 +73,7 @@ class Manufacturer
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      *
      * @Assert\NotBlank(message = "Manufacturer name is required.")
      *
