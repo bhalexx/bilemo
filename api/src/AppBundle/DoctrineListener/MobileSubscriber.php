@@ -11,11 +11,17 @@ class MobileSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return array(
-            'prePersist'
+            'prePersist',
+            'preUpdate'
         );
     }
 
     public function prePersist(LifecycleEventArgs $args)
+    {
+        $this->index($args);
+    }
+
+    public function preUpdate(LifecycleEventArgs $args)
     {
         $this->index($args);
     }
@@ -27,8 +33,14 @@ class MobileSubscriber implements EventSubscriber
         // Only act on "Product" entity
         if ($entity instanceof Product) {
             $entityManager = $args->getEntityManager();
+            
             // Set dateInsert
            	$entity->setDateInsert(new \DateTime());
+
+            // Set OS
+            $os = $entityManager->getRepository('AppBundle:Os')->findOneById($entity->getOs());
+            $entity->setOs($os);
+
 	        // Set manufacturer
 	        $manufacturer = $entityManager->getRepository('AppBundle:Manufacturer')->findOneById($entity->getManufacturer());
 	        $entity->setManufacturer($manufacturer);
