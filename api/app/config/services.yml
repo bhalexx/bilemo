@@ -52,6 +52,11 @@ services:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
     
+    mobile.doctrine_subscriber:
+        class: AppBundle\DoctrineListener\MobileSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+    
     # alias to allow this type to be autowired
     FOS\OAuthServerBundle\Entity\ClientManager: '@fos_oauth_server.client_manager.default'
 

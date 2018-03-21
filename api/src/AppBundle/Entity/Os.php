@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation as Serializer;
@@ -13,8 +12,6 @@ use JMS\Serializer\Annotation as Serializer;
  *
  * @ORM\Table(name="bilemo_os")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\OsRepository")
- *
- * @UniqueEntity(fields={"name"}, message="Os with same name already exists.")
  * 
  * @Hateoas\Relation(
  *      "self",

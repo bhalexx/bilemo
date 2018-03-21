@@ -30,7 +30,7 @@ abstract class Product
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -39,17 +39,17 @@ abstract class Product
      *
      * @Assert\NotBlank(message = "Product name is required.")
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Manufacturer", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Manufacturer", cascade={"persist"})
      * @ORM\JoinColumn(onDelete="SET NULL")
      *
      * @Assert\NotBlank(message="Product manufacturer is required.")
      */
-    private $manufacturer;
+    protected $manufacturer;
 
     /**
      * @var \DateTime
@@ -58,7 +58,7 @@ abstract class Product
      *
      * @Assert\DateTime()
      */
-    private $dateInsert;
+    protected $dateInsert;
 
     /**
      * @var int
@@ -67,7 +67,7 @@ abstract class Product
      *
      * @Assert\NotBlank(message="Product stock is required.")
      */
-    private $stock;
+    protected $stock;
 
     /**
      * @var string
@@ -79,7 +79,7 @@ abstract class Product
      *     @Assert\Type("Picture")
      * })
      */
-    private $pictures;  
+    protected $pictures;  
 
     /**
      * @var string
@@ -91,7 +91,7 @@ abstract class Product
      *     @Assert\Type("Feature")
      * })
      */
-    private $features;
+    protected $features;
 
     public function __construct()
     {
@@ -215,8 +215,12 @@ abstract class Product
      */
     public function addPicture(Picture $picture)
     {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+        }
+
         $picture->setProduct($this);
-        $this->pictures[] = $picture;
+
         return $this;
     }
 
@@ -249,8 +253,12 @@ abstract class Product
      */
     public function addFeature(Feature $feature)
     {
+        if (!$this->features->contains($feature)) {
+            $this->features[] = $feature;
+        }
+
         $feature->setProduct($this);
-        $this->features[] = $feature;
+        
         return $this;
     }
 
