@@ -13,7 +13,7 @@ class Mobiles
     public $data;
     public $meta;
     
-    public function __construct(Pagerfanta $data, $picturePath)
+    public function __construct(Pagerfanta $data)
     {
         $this->data = $data;
         
