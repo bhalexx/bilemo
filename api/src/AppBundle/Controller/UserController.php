@@ -50,6 +50,7 @@ class UserController extends FOSRestController
      *     path = "/api/users",
      *     name = "api_user_create"
      * )
+     * 
      * @Rest\View(
      *     statusCode = 201
      * )
@@ -87,8 +88,7 @@ class UserController extends FOSRestController
         $user->setFirstname($newUser->getFirstname());
         $user->setLastname($newUser->getLastname());
         $user->setPhone($newUser->getPhone());
-        $user->setUsername($newUser->getFirstname().' '.$newUser->getLastname());
-        $user->setPlainPassword($newUser->getPlainPassword());
+        $user->setUsername($newUser->getUsername());
         $user->setEmail($newUser->getEmail());
 
         $this->getDoctrine()->getManager()->flush();

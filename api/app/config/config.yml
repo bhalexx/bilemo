@@ -82,15 +82,6 @@ fos_rest:
     param_fetcher_listener: 'force'
     serializer:
         serialize_null: true
-
-# FOSUser Configuration
-fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: AppBundle\Entity\User
-    from_email:
-        address: "%mailer_user%"
-        sender_name: "%mailer_user%"
         
 # FOSOAuthServer Configuration
 fos_oauth_server:
