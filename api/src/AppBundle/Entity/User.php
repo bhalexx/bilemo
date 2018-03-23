@@ -118,7 +118,7 @@ class User
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Application")
+     * @ORM\ManyToMany(targetEntity="Application", inversedBy="users")
      * @ORM\JoinTable(name="bilemo_user_application")
      *
      * @Assert\All({
