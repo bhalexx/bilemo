@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
@@ -112,6 +113,19 @@ class Application implements UserInterface
      * @ORM\Column(name="roles", type="array")
      */
     private $roles = array();
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="applications")
+     * 
+     */
+    protected $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -283,5 +297,37 @@ class Application implements UserInterface
     public function getPlainPassword()
     {
         return $this->plainPassword;
+    }
+
+    /**
+     * Get users
+     * 
+     * @return ArrayCollection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * Add user
+     *
+     * @param User user
+     *
+     * @return Command
+     */
+    public function addUser(User $user)
+    {
+        $this->users[] = $user;
+        return $this;
+    }
+    /**
+     * Remove user
+     *
+     * @param User $application
+     */
+    public function removeUser(User $user)
+    {
+        $this->users->removeElement($user);
     }
 }
