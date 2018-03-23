@@ -2,7 +2,6 @@
 # https://symfony.com/doc/current/security.html
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: bcrypt
         AppBundle\Entity\Application: bcrypt
 
     role_hierarchy:
@@ -12,8 +11,8 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username
+        in_memory:
+            memory: ~
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs

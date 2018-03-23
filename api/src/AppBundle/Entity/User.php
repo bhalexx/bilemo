@@ -5,7 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use FOS\UserBundle\Model\User as BaseUser;
 use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
@@ -62,7 +61,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *     embedded = @Hateoas\Embedded("expr(object.getApplications())")
  * )
  */
-class User extends BaseUser
+class User
 {
     /**
      * @var int
@@ -72,6 +71,15 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255)
+     *
+     * @Assert\NotBlank(message = "User username is required.")
+     */
+    protected $username;
 
     /**
      * @var string
@@ -94,6 +102,15 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="email", type="string", length=255)
+     *
+     * @Assert\NotBlank(message = "User email is required.")
+     */
+    protected $email;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     protected $phone;
@@ -112,10 +129,7 @@ class User extends BaseUser
 
     public function __construct()
     {
-        parent::__construct();
         $this->applications = new ArrayCollection();
-        $this->setUsername($this->firstname. ' '. $this->lastname);
-        $this->setEnabled(true);
     }
 
     /**
@@ -126,6 +140,30 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
     }
 
     /**
@@ -177,6 +215,30 @@ class User extends BaseUser
     }
 
     /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
      * Set phone
      *
      * @param string $phone
@@ -198,6 +260,16 @@ class User extends BaseUser
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Get applications
+     * 
+     * @return ArrayCollection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
     }
 
     /**

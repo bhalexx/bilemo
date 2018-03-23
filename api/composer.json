@@ -19,7 +19,6 @@
         "doctrine/orm": "^2.5",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "^2.3",
-        "friendsofsymfony/user-bundle": "~2.0",
         "incenteev/composer-parameter-handler": "^2.0",
         "jms/serializer-bundle": "^2.3",
         "nelmio/api-doc-bundle": "^3.0",
