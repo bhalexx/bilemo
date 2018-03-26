@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Feature
@@ -46,6 +47,8 @@ class Feature
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="features")
      *
      * @Assert\NotBlank(message = "Linking this feature to a product is required.")
+     *
+     * @Serializer\Exclude
      */
     private $product;
 
