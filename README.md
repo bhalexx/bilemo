@@ -95,3 +95,4 @@ This API project is as documented as possible, so you can find:
 Two other projects were created to show how to use this API:
 - [Bilemo Admin](https://github.com/bhalexx/bilemo_admin) - the Bilemo administration application
 - [OpenMobileRooms](https://github.com/bhalexx/openmobilerooms) - a Bilemo B2B partner application
+
