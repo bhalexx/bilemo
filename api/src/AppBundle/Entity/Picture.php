@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Picture
@@ -34,17 +35,22 @@ class Picture
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="pictures")
+     *
+     * @Serializer\Exclude
      */
     private $product;
 
     /**
      * @var string
+     *
+     * @Serializer\Exclude
      */
     private $file;
 
     /**
      * @var string
      *
+     * @Serializer\Exclude
      */
     private $temp;
 

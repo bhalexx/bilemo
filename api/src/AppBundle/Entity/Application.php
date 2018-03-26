@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Application
@@ -74,6 +75,8 @@ class Application implements UserInterface
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      *
      * @Assert\NotBlank(message = "Application name is required.")
+     *
+     * @Serializer\Since("1.0")
      */
     private $username;
 
@@ -84,6 +87,8 @@ class Application implements UserInterface
      *
      * @Assert\NotBlank(message = "Application email is required.")
      * @Assert\Email()
+     *
+     * @Serializer\Since("1.0")
      */
     private $email;
 
@@ -91,11 +96,15 @@ class Application implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     *
+     * @Serializer\Exclude
      */
     private $password;
 
     /**
      * @var string
+     *
+     * @Serializer\Exclude
      */
     private $plainPassword;
 
@@ -106,11 +115,15 @@ class Application implements UserInterface
      *
      * @Assert\NotBlank(message = "Application uri is required.")
      * @Assert\Url()
+     *
+     * @Serializer\Since("1.0")
      */
     private $uri;
 
     /**
      * @ORM\Column(name="roles", type="array")
+     *
+     * @Serializer\Since("1.0")
      */
     private $roles = array();
 
@@ -118,7 +131,8 @@ class Application implements UserInterface
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="User", mappedBy="applications")
-     * 
+     *
+     * @Serializer\Since("1.0") 
      */
     protected $users;
 

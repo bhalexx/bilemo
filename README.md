@@ -84,7 +84,7 @@ Your access token expires after 10 minutes. To get a new access token use your r
 }
 ```
 
-Now you'ready to enjoy!
+Now you'ready to enjoy! Refer to documentation to use API endpoints according to your needs.
 
 ### Documentation
 This API project is as documented as possible, so you can find:

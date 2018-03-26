@@ -60,6 +60,11 @@ use JMS\Serializer\Annotation as Serializer;
  *     "os",
  *     embedded = @Hateoas\Embedded("expr(object.getOs())")
  * )
+ *
+ * @Hateoas\Relation(
+ *     "manufacturer",
+ *     embedded = @Hateoas\Embedded("expr(object.getManufacturer())")
+ * )
  */
 class Mobile extends Product
 {
