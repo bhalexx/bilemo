@@ -6,6 +6,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use AppBundle\Entity\Mobile;
@@ -78,6 +79,8 @@ class MobileController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     * 
      * @Rest\Post(
      *     path = "/api/mobiles",
      *     name = "api_mobile_create"
@@ -103,6 +106,8 @@ class MobileController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     * 
      * @Rest\Put(
      *     path = "/api/mobiles/{id}",
      *     name = "api_mobile_update",
@@ -131,6 +136,8 @@ class MobileController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     * 
      * @Rest\Delete(
      *     path = "/api/mobiles/{id}",
      *     name = "api_mobile_delete",
