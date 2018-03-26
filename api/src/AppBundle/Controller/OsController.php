@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use AppBundle\Entity\Os;
@@ -49,6 +50,8 @@ class OsController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     * 
      * @Rest\Post(
      *     path = "/api/os",
      *     name = "api_os_create"
@@ -75,6 +78,8 @@ class OsController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     * 
      * @Rest\Put(
      *     path = "/api/os/{id}",
      *     name = "api_os_update",
@@ -97,6 +102,8 @@ class OsController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     * 
      * @Rest\Delete(
      *     path = "/api/os/{id}",
      *     name = "api_os_delete",

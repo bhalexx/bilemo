@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use AppBundle\Entity\Manufacturer;
@@ -46,6 +47,8 @@ class ManufacturerController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     * 
      * @Rest\Post(
      *     path = "/api/manufacturers",
      *     name = "api_manufacturer_create"
@@ -71,6 +74,8 @@ class ManufacturerController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     * 
      * @Rest\Put(
      *     path = "/api/manufacturers/{id}",
      *     name = "api_manufacturer_update",
@@ -91,6 +96,8 @@ class ManufacturerController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     * 
      * @Rest\Delete(
      *     path = "/api/manufacturers/{id}",
      *     name = "api_manufacturer_delete",

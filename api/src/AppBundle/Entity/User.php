@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * User
@@ -31,35 +32,10 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * )
  *
  * @Hateoas\Relation(
- *     "create",
- *     href = @Hateoas\Route(
- *         "api_user_create",
- *         absolute = true
- *     )
- * )
- *
- * @Hateoas\Relation(
- *     "update",
- *     href = @Hateoas\Route(
- *         "api_user_update",
- *         parameters = { "id" = "expr(object.getId())" },
- *         absolute = true
- *     )
- * )
- *
- * @Hateoas\Relation(
- *     "delete",
- *     href = @Hateoas\Route(
- *         "api_user_delete",
- *         parameters = { "id" = "expr(object.getId())" },
- *         absolute = true
- *     )
- * )
- *
- * @Hateoas\Relation(
  *     "applications",
  *     embedded = @Hateoas\Embedded("expr(object.getApplications())")
  * )
+ *
  */
 class User
 {
@@ -69,6 +45,7 @@ class User
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      */
     protected $id;
 
@@ -78,6 +55,8 @@ class User
      * @ORM\Column(name="username", type="string", length=255)
      *
      * @Assert\NotBlank(message = "User username is required.")
+     *
+     * @Serializer\Since("1.0")
      */
     protected $username;
 
@@ -87,6 +66,8 @@ class User
      * @ORM\Column(name="firstname", type="string", length=255)
      *
      * @Assert\NotBlank(message = "User firstname is required.")
+     *
+     * @Serializer\Since("1.0")
      */
     protected $firstname;
 
@@ -96,6 +77,8 @@ class User
      * @ORM\Column(name="lastname", type="string", length=255)
      *
      * @Assert\NotBlank(message = "User lastname is required.")
+     *
+     * @Serializer\Since("1.0")
      */
     protected $lastname;
 
@@ -105,6 +88,8 @@ class User
      * @ORM\Column(name="email", type="string", length=255)
      *
      * @Assert\NotBlank(message = "User email is required.")
+     *
+     * @Serializer\Since("1.0")
      */
     protected $email;
 
@@ -112,6 +97,8 @@ class User
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
+     *
+     * @Serializer\Since("1.0")
      */
     protected $phone;
 
@@ -124,6 +111,8 @@ class User
      * @Assert\All({
      *     @Assert\Type("Application")
      * })
+     *
+     * @Serializer\Since("1.0")
      */
     protected $applications;
 

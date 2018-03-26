@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Mobile
@@ -69,6 +70,8 @@ class Mobile extends Product
      * @ORM\JoinColumn(onDelete="SET NULL")
      *
      * @Assert\NotBlank(message = "Mobile OS is required.")
+     *
+     * @Serializer\Since("1.0")
      */
     private $os;
 
@@ -78,6 +81,8 @@ class Mobile extends Product
      * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
      *
      * @Assert\NotBlank(message = "Mobile price is required.")
+     *
+     * @Serializer\Since("1.0")
      */
     private $price;
 
@@ -85,6 +90,8 @@ class Mobile extends Product
      * @var string
      *
      * @ORM\Column(name="colorName", type="string", length=255, nullable = true)
+     *
+     * @Serializer\Since("1.0")
      */
     private $colorName;
 
@@ -92,6 +99,8 @@ class Mobile extends Product
      * @var string
      *
      * @ORM\Column(name="colorCode", type="string", length=255, nullable = true)
+     * 
+     * @Serializer\Since("1.0")
      */
     private $colorCode;
 
@@ -99,6 +108,8 @@ class Mobile extends Product
      * @var int
      *
      * @ORM\Column(name="memory", type="integer", nullable = true)
+     *
+     * @Serializer\Since("1.0")
      */
     private $memory;
 

@@ -28,6 +28,8 @@ nelmio_api_doc:
         description: Everything about mobile phones
       - name: users
         description: Everything about users
+      - name: applications
+        description: Everyting about partner applications
     definitions:
       Os:
         type: object
@@ -111,15 +113,46 @@ nelmio_api_doc:
       User:
         type: object
         properties:
+          username:
+            type: string
           firstname:
             type: string
           lastname:
             type: string
+          email:
+            type: string
           phone:
             type: string
+          applications:
+            type: array
+            items: 
+              $ref: "#/definitions/Application"
       GetUser:
         allOf:
           - $ref: "#/definitions/User"
+        properties:
+          id:
+            type: integer
+      Application:
+        type: object
+        properties:
+          username:
+            type: string
+          email:
+            type: string
+          uri:
+            type: string
+          roles:
+            type: array
+            items:
+              type: string
+              enum:
+                - "ROLE_APPLICATION"
+                - "ROLE_BILEMO"
+              default: "ROLE_APPLICATION"
+      GetApplication:
+        allOf:
+          - $ref: "#/definitions/Application"
         properties:
           id:
             type: integer
@@ -167,6 +200,8 @@ nelmio_api_doc:
               description: Bad request - Invalid or missing data, or an OS with the same name already exists.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
       '/api/os/{id}':
         get:
           tags:
@@ -222,6 +257,8 @@ nelmio_api_doc:
               description: Bad request - Invalid or missing data, or an OS with the same name already exists.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
             '404':
               description: The requested OS was not found.
         delete:
@@ -242,6 +279,8 @@ nelmio_api_doc:
           responses:
             '204':
               description: No content - OS successfully deleted
+            '403':
+              description: Forbidden - You are not allowed to access this method.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
       '/api/manufacturers':
@@ -287,6 +326,8 @@ nelmio_api_doc:
               description: Bad request - Invalid or missing data, or a manufacturer with the same name already exists.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
       '/api/manufacturers/{id}':
         get:
           tags:
@@ -342,6 +383,8 @@ nelmio_api_doc:
               description: Bad request - Invalid or missing data, or a manufacturer with the same name already exists.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
             '404':
               description: The requested manufacturer was not found.
         delete:
@@ -362,6 +405,8 @@ nelmio_api_doc:
           responses:
             '204':
               description: No content - manufacturer successfully deleted
+            '403':
+              description: Forbidden - You are not allowed to access this method.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
       '/api/mobiles':
@@ -374,6 +419,25 @@ nelmio_api_doc:
             - application/json
           produces:
             - application/json
+          parameters:
+            - name: "manufacturer"
+              in: "query"
+              description: "The manufacturer id to search for."
+              type: integer
+            - name: "order"
+              in: "query"
+              description: "The sorting order type (asc|desc)"
+              type: string
+              default: 'asc'
+            - name: "limit"
+              in: "query"
+              description: "The max number of mobiles per page"
+              type: integer
+              default: 20
+            - name: "offset"
+              in: "query"
+              description: "The pagination offset"
+              type: integer
           responses:
             '200':
               description: Successful operation
@@ -407,6 +471,8 @@ nelmio_api_doc:
               description: Bad request - Invalid or missing data, or a mobile with the same name already exists.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
       '/api/mobiles/{id}':
         get:
           tags:
@@ -462,6 +528,8 @@ nelmio_api_doc:
               description: Bad request - Invalid or missing data, or a mobile with the same name already exists.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
             '404':
               description: The requested mobile was not found.
         delete:
@@ -482,14 +550,17 @@ nelmio_api_doc:
           responses:
             '204':
               description: No content - mobile successfully deleted
+            '403':
+              description: Forbidden - You are not allowed to access this method.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
       '/api/users':
         get:
           tags:
             - users
-          summary: Gets users list
-          description: This method allows you to get users list.
+          summary: "[BILEMO ADMIN ONLY] Gets users list"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to get users list.
           consumes: 
             - application/json
           produces:
@@ -501,38 +572,15 @@ nelmio_api_doc:
                 $ref: "#/definitions/GetUser"
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
-        post:
-          tags:
-            - users
-          summary: "[BILEMO ADMIN ONLY] Adds a new user"
-          description: |
-            **BILEMO ADMIN ONLY** - This method allows you to add a new user.
-          consumes: 
-            - application/json
-          produces:
-            - application/json
-          parameters:
-            - in: "body"
-              name: "body"
-              description: "User object that needs to be added"
-              required: true
-              schema:
-                $ref: "#/definitions/User"
-          responses:
-            '201':
-              description: New user created
-              schema:
-                $ref: "#/definitions/GetUser"
-            '400':
-              description: Bad request - Invalid or missing data.
-            '401':
-              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
       '/api/users/{id}':
         get:
           tags:
             - users
-          summary: Gets details of the selected user.
-          description: This method allows you to get the details of the selected user.
+          summary: "[BILEMO ADMIN ONLY] Gets details of the selected user."
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to get the details of the selected user.
           consumes: 
               - application/json
           produces:
@@ -550,46 +598,92 @@ nelmio_api_doc:
                 $ref: "#/definitions/GetUser"
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
             '404':
               description: The requested user was not found.
-        put:
+      '/api/applications':
+        get:
           tags:
-            - users
-          summary: "[BILEMO ADMIN ONLY] Updates an existing user"
+            - applications
+          summary: "[BILEMO ADMIN ONLY] Gets partner applications list"
           description: |
-            **BILEMO ADMIN ONLY** - This method allows you to update an existing user.
+            **BILEMO ADMIN ONLY** - This method allows you to get partner applications list.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/GetApplication"
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
+        post:
+          tags:
+            - applications
+          summary: "[BILEMO ADMIN ONLY] Adds a new partner application"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to add a new partner application.
           consumes: 
             - application/json
           produces:
             - application/json
           parameters:
-            - in: "path"
-              name: "id"
-              required: true
-              description: id of the user to update
             - in: "body"
               name: "body"
-              description: "User object that needs to be updated"
+              description: "Application object that needs to be added"
               required: true
               schema:
-                $ref: "#/definitions/User"
+                $ref: "#/definitions/Application"
           responses:
             '201':
-              description: User successfully updated
+              description: New partner application created
               schema:
-                $ref: "#/definitions/GetUser"
+                $ref: "#/definitions/GetApplication"
             '400':
-              description: Bad request - Invalid or missing data.
+              description: Bad request - Invalid or missing data, or an application with the same name already exists.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
-            '404':
-              description: The requested user was not found.
-        delete:
+            '403':
+              description: Forbidden - You are not allowed to access this method.
+      '/api/applications/{id}':
+        get:
           tags:
-            - users
-          summary: "[BILEMO ADMIN ONLY] Deletes an existing user"
+            - applications
+          summary: "[BILEMO ADMIN ONLY] Gets details of the selected partner application."
           description: |
-            **BILEMO ADMIN ONLY** - This method allows you to delete an existing user.
+            **BILEMO ADMIN ONLY** - This method allows you to get the details of the selected application.
+          consumes: 
+              - application/json
+          produces:
+            - application/json
+          parameters:
+            - name: id
+              in: path
+              description: id of the application to return
+              required: true
+              type: integer
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/GetApplication"
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
+            '404':
+              description: The requested application was not found.
+        put:
+          tags:
+            - applications
+          summary: "[BILEMO ADMIN ONLY] Updates an existing partner application"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to update an existing application.
           consumes: 
             - application/json
           produces:
@@ -598,9 +692,45 @@ nelmio_api_doc:
             - in: "path"
               name: "id"
               required: true
-              description: id of the user to delete
+              description: id of the application to update
+            - in: "body"
+              name: "body"
+              description: "Application object that needs to be updated"
+              required: true
+              schema:
+                $ref: "#/definitions/Application"
           responses:
-            '204':
-              description: No content - user successfully deleted
+            '201':
+              description: Application successfully updated
+              schema:
+                $ref: "#/definitions/GetApplication"
+            '400':
+              description: Bad request - Invalid or missing data, or an application with the same name already exists.
             '401':
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.
+            '404':
+              description: The requested application was not found.
+        delete:
+          tags:
+            - applications
+          summary: "[BILEMO ADMIN ONLY] Deletes an existing partner application"
+          description: |
+            **BILEMO ADMIN ONLY** - This method allows you to delete an existing partner application.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the application to delete
+          responses:
+            '204':
+              description: No content - Application successfully deleted
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '403':
+              description: Forbidden - You are not allowed to access this method.

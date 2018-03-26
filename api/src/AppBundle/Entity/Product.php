@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Product
@@ -38,6 +39,8 @@ abstract class Product
      * @ORM\Column(name="name", type="string", length=255, unique=true)
      *
      * @Assert\NotBlank(message = "Product name is required.")
+     *
+     * @Serializer\Since("1.0")
      */
     protected $name;
 
@@ -48,6 +51,8 @@ abstract class Product
      * @ORM\JoinColumn(onDelete="SET NULL")
      *
      * @Assert\NotBlank(message="Product manufacturer is required.")
+     *
+     * @Serializer\Since("1.0")
      */
     protected $manufacturer;
 
@@ -57,6 +62,8 @@ abstract class Product
      * @ORM\Column(name="dateInsert", type="datetime")
      *
      * @Assert\DateTime()
+     *
+     * @Serializer\Since("1.0")
      */
     protected $dateInsert;
 
@@ -66,6 +73,8 @@ abstract class Product
      * @ORM\Column(name="stock", type="integer")
      *
      * @Assert\NotBlank(message="Product stock is required.")
+     *
+     * @Serializer\Since("1.0")
      */
     protected $stock;
 
@@ -78,6 +87,8 @@ abstract class Product
      * @Assert\All({
      *     @Assert\Type("Picture")
      * })
+     *
+     * @Serializer\Since("1.0")
      */
     protected $pictures;  
 
@@ -90,6 +101,8 @@ abstract class Product
      * @Assert\All({
      *     @Assert\Type("Feature")
      * })
+     *
+     * @Serializer\Since("1.0")
      */
     protected $features;
 
