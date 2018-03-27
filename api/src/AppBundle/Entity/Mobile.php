@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation as Serializer;
  *
  * @ORM\Table(name="mobile")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MobileRepository")
- * 
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(
@@ -104,7 +104,7 @@ class Mobile extends Product
      * @var string
      *
      * @ORM\Column(name="colorCode", type="string", length=255, nullable = true)
-     * 
+     *
      * @Serializer\Since("1.0")
      */
     private $colorCode;

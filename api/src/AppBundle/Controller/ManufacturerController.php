@@ -48,7 +48,7 @@ class ManufacturerController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_BILEMO')")
-     * 
+     *
      * @Rest\Post(
      *     path = "/api/manufacturers",
      *     name = "api_manufacturer_create"
@@ -75,7 +75,7 @@ class ManufacturerController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_BILEMO')")
-     * 
+     *
      * @Rest\Put(
      *     path = "/api/manufacturers/{id}",
      *     name = "api_manufacturer_update",
@@ -97,7 +97,7 @@ class ManufacturerController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_BILEMO')")
-     * 
+     *
      * @Rest\Delete(
      *     path = "/api/manufacturers/{id}",
      *     name = "api_manufacturer_delete",

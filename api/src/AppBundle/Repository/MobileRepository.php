@@ -24,7 +24,7 @@ class MobileRepository extends AbstractRepository
 	            ->setParameter('manufacturerId', $manufacturerId)
 			;
         }
-        
+
         return $this->paginate($qb, $limit, $offset);
     }
 }

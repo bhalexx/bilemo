@@ -253,7 +253,7 @@ class User
 
     /**
      * Get applications
-     * 
+     *
      * @return ArrayCollection
      */
     public function getApplications()

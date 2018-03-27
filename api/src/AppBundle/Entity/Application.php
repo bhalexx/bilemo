@@ -132,7 +132,7 @@ class Application implements UserInterface
      *
      * @ORM\ManyToMany(targetEntity="User", mappedBy="applications")
      *
-     * @Serializer\Since("1.0") 
+     * @Serializer\Since("1.0")
      */
     protected $users;
 
@@ -315,7 +315,7 @@ class Application implements UserInterface
 
     /**
      * Get users
-     * 
+     *
      * @return ArrayCollection
      */
     public function getUsers()

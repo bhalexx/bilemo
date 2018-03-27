@@ -39,7 +39,7 @@ class UserSubscriber implements EventSubscriber
         $entity = $args->getEntity();
 
         // Only act on "User" entity
-        if ($entity instanceof User) {            
+        if ($entity instanceof User) {
             $application = $this->tokenStorage->getToken()->getUser();
             $entity->addApplication($application);
         }

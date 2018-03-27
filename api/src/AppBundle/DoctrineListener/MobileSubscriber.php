@@ -33,7 +33,7 @@ class MobileSubscriber implements EventSubscriber
         // Only act on "Product" entity
         if ($entity instanceof Product) {
             $entityManager = $args->getEntityManager();
-            
+
             // Set dateInsert
            	$entity->setDateInsert(new \DateTime());
 

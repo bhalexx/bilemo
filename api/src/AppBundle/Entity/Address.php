@@ -218,4 +218,3 @@ class Address
         return $this->isDefault;
     }
 }
-

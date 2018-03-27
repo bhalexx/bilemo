@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\OsRepository")
  *
  * @UniqueEntity(fields={"name"}, message="Os with same name already exists.")
- * 
+ *
  * @Hateoas\Relation(
  *      "self",
  *      href = @Hateoas\Route(

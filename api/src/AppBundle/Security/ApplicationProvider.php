@@ -20,7 +20,7 @@ class ApplicationProvider implements UserProviderInterface
     public function loadUserByUsername($username)
     {
         $application = $this->em->getRepository('AppBundle:Application')->findOneByUsername($username);
-        
+
         if (!$application) {
             throw new \LogicException("Unexisting application");
         }
@@ -36,7 +36,7 @@ class ApplicationProvider implements UserProviderInterface
         }
         return $this->loadUserByUsername($application->getName());
     }
-    
+
     public function supportsClass($class)
     {
         return Application::class === $class;

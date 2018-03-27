@@ -26,7 +26,7 @@ class MobileController extends FOSRestController
      *     nullable = true,
      *     description = "The manufacturer to search for."
      * )
-     * 
+     *
      * @Rest\QueryParam(
      *     name = "order",
      *     requirements = "asc|desc",
@@ -45,7 +45,7 @@ class MobileController extends FOSRestController
      *     default = "0",
      *     description = "The pagination offset"
      * )
-     * 
+     *
      * @Rest\View(
      *     statusCode = 200
      * )
@@ -80,7 +80,7 @@ class MobileController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_BILEMO')")
-     * 
+     *
      * @Rest\Post(
      *     path = "/api/mobiles",
      *     name = "api_mobile_create"
@@ -107,7 +107,7 @@ class MobileController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_BILEMO')")
-     * 
+     *
      * @Rest\Put(
      *     path = "/api/mobiles/{id}",
      *     name = "api_mobile_update",
@@ -137,7 +137,7 @@ class MobileController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_BILEMO')")
-     * 
+     *
      * @Rest\Delete(
      *     path = "/api/mobiles/{id}",
      *     name = "api_mobile_delete",

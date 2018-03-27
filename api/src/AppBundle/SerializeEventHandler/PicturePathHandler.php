@@ -28,7 +28,7 @@ class PicturePathHandler implements EventSubscriberInterface
     public function onPreSerialize(PreSerializeEvent $event)
     {
         $picture = $event->getObject();
-        
+
         $picture->setPath($this->path.$picture->getPath());
     }
 }
