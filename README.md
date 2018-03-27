@@ -5,8 +5,8 @@ This project is a REST API for Bilemo to allow partners to display their mobile 
 This API was built with **Symfony 3.4**.
 It's the 7th [OpenClassRooms](https://openclassrooms.com/) PHP/Symfony Developer project.
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c42fc2dbed964964985ca34c03c99d7c)](https://www.codacy.com/app/bhalexx/bilemo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bhalexx/bilemo&amp;utm_campaign=Badge_Grade) 
-[![Maintainability](https://api.codeclimate.com/v1/badges/7669fe651a7626557f7e/maintainability)](https://codeclimate.com/github/bhalexx/bilemo/maintainability) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c42fc2dbed964964985ca34c03c99d7c)](https://www.codacy.com/app/bhalexx/bilemo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bhalexx/bilemo&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7669fe651a7626557f7e/maintainability)](https://codeclimate.com/github/bhalexx/bilemo/maintainability)
 [![Build Status](https://travis-ci.org/bhalexx/bilemo.svg?branch=master)](https://travis-ci.org/bhalexx/bilemo)
 
 ---
@@ -44,7 +44,8 @@ Those dependencies are included in composer.json.
 ### Authentication to access API
 This API is restricted to Bilemo partners. When a Bilemo admin adds your application as a new partner, your credentials are sent by email.
 
-_**For demo**_ you can also run this command to create your application as a Bilemo partner:
+#### Become a Bilemo partner
+_**For demo**_ you can also run this command to create your application as a **Bilemo partner**:
 
 `php bin/console bilemo:partner:create {YourApplicationName} {YourPassword} {YourEmail} {YourRedirectURI}`
 
@@ -85,6 +86,11 @@ Your access token expires after 10 minutes. To get a new access token use your r
 ```
 
 Now you'ready to enjoy! Refer to documentation to use API endpoints according to your needs.
+
+#### Become a Bilemo admin
+_**Still for demo**_ you can also create your application as a **Bilemo administrator** by running the same command with the optional parameter `admin`:
+
+`php bin/console bilemo:partner:create {YourApplicationName} {YourPassword} {YourEmail} {YourRedirectURI} admin`
 
 ### Documentation
 This API project is as documented as possible, so you can find:
