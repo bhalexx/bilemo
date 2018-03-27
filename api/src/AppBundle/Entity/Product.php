@@ -90,7 +90,7 @@ abstract class Product
      *
      * @Serializer\Since("1.0")
      */
-    protected $pictures;  
+    protected $pictures;
 
     /**
      * @var string
@@ -271,7 +271,7 @@ abstract class Product
         }
 
         $feature->setProduct($this);
-        
+
         return $this;
     }
 

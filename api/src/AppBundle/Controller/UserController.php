@@ -10,12 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use AppBundle\Entity\User;
 
-/**
- * @Security("has_role('ROLE_BILEMO')")
- */
 class UserController extends FOSRestController
 {
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     *
      * @Rest\Get(
      *     path = "/api/users",
      *     name = "api_user_list"
@@ -34,6 +33,8 @@ class UserController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_BILEMO')")
+     *
      * @Rest\Get(
      *     path = "/api/users/{id}",
      *     name = "api_user_view",
@@ -46,6 +47,28 @@ class UserController extends FOSRestController
      */
     public function viewAction(User $user)
     {
+        return $user;
+    }
+
+    /**
+     * @Rest\Post(
+     *     path = "/api/users",
+     *     name = "api_user_create"
+     * )
+     *
+     * @Rest\View(
+     *     statusCode = 201
+     * )
+     *
+     * @ParamConverter("user", converter="fos_rest.request_body")
+     */
+    public function createAction(User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($user);
+        $em->flush();
+
         return $user;
     }
 }

@@ -1,33 +1,33 @@
 <?php
 
-	namespace AppBundle\DoctrineListener;
-	
-	use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-	use AppBundle\Services\ClientMailer;
-	use AppBundle\Entity\Client;
+namespace AppBundle\DoctrineListener;
 
-	class ClientCreationListener
-	{		
-		/**
-		 * @var ClientMailer
-		 */
-		private $clientMailer;
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use AppBundle\Services\ClientMailer;
+use AppBundle\Entity\Client;
 
-		public function __construct(ClientMailer $clientMailer)
-		{
-			$this->clientMailer = $clientMailer;
-		}
+class ClientCreationListener
+{
+    /**
+     * @var ClientMailer
+     */
+    private $clientMailer;
 
-		public function postPersist(LifecycleEventArgs $args)
-		{
-			$entity = $args->getObject();
+    public function __construct(ClientMailer $clientMailer)
+    {
+        $this->clientMailer = $clientMailer;
+    }
 
-			//Only if entity is an instance of Client
-			if (!$entity instanceof Client) {
-				return;
-			}
-			
-			//Send mail
-			$this->clientMailer->sendCredentialsEmail($entity);
-		}
-	}
+    public function postPersist(LifecycleEventArgs $args)
+    {
+        $entity = $args->getObject();
+
+        //Only if entity is an instance of Client
+        if (!$entity instanceof Client) {
+            return;
+        }
+
+        //Send mail
+        $this->clientMailer->sendCredentialsEmail($entity);
+    }
+}

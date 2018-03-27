@@ -17,7 +17,7 @@ class CommandController extends FOSRestController
      *     path = "/api/commands",
      *     name = "api_command_list"
      * )
-     * 
+     *
      * @Rest\View(
      *     statusCode = 200
      * )
@@ -84,7 +84,7 @@ class CommandController extends FOSRestController
      * )
      *
      * @ParamConverter("newCommand", converter="fos_rest.request_body")
-     * 
+     *
      */
     public function updateAction(Command $command, Command $newCommand)
     {

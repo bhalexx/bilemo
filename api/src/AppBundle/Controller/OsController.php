@@ -17,11 +17,11 @@ class OsController extends FOSRestController
      *     path = "/api/os",
      *     name = "api_os_list"
      * )
-     * 
+     *
      * @Rest\View(
      *     statusCode = 200
      * )
-     * 
+     *
      */
     public function listAction()
     {
@@ -42,7 +42,7 @@ class OsController extends FOSRestController
      * @Rest\View(
      *     statusCode = 200
      * )
-     * 
+     *
      */
     public function viewAction(Os $os)
     {
@@ -51,7 +51,7 @@ class OsController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_BILEMO')")
-     * 
+     *
      * @Rest\Post(
      *     path = "/api/os",
      *     name = "api_os_create"
@@ -61,7 +61,7 @@ class OsController extends FOSRestController
      * )
      *
      * @ParamConverter("os", converter="fos_rest.request_body")
-     * 
+     *
      */
     public function createAction(Os $os)
     {
@@ -79,19 +79,19 @@ class OsController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_BILEMO')")
-     * 
+     *
      * @Rest\Put(
      *     path = "/api/os/{id}",
      *     name = "api_os_update",
      *     requirements = { "id" = "\d+" }
      * )
-     * 
+     *
      * @Rest\View(
      *     statusCode = 200
      * )
      *
      * @ParamConverter("newOs", converter="fos_rest.request_body")
-     * 
+     *
      */
     public function updateAction(Os $os, Os $newOs)
     {
@@ -103,13 +103,13 @@ class OsController extends FOSRestController
 
     /**
      * @Security("has_role('ROLE_BILEMO')")
-     * 
+     *
      * @Rest\Delete(
      *     path = "/api/os/{id}",
      *     name = "api_os_delete",
      *     requirements = { "id" = "\d+" }
      * )
-     * 
+     *
      * @Rest\View(
      *     statusCode = 204
      * )

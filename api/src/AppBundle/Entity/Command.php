@@ -280,4 +280,3 @@ class Command
         return $this->application;
     }
 }
-

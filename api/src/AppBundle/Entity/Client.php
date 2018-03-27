@@ -20,7 +20,7 @@ class Client extends BaseClient
 
     /**
      * @var Application
-     * 
+     *
      * @ORM\OneToOne(targetEntity="Application")
      */
     protected $application;

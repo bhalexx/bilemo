@@ -574,6 +574,31 @@ nelmio_api_doc:
               description: Unauthorized - You need a valid access token to get the permission to access this URL.
             '403':
               description: Forbidden - You are not allowed to access this method.
+        post:
+          tags:
+            - users
+          summary: "Adds a new user"
+          description: This method allows you to add a new user.
+          consumes: 
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "body"
+              name: "body"
+              description: "User object that needs to be added"
+              required: true
+              schema:
+                $ref: "#/definitions/User"
+          responses:
+            '201':
+              description: New user created
+              schema:
+                $ref: "#/definitions/GetUser"
+            '400':
+              description: Bad request - Invalid or missing data.
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
       '/api/users/{id}':
         get:
           tags:

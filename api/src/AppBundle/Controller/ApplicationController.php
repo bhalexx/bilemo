@@ -1,6 +1,5 @@
 <?php
 
-
 namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -28,7 +27,7 @@ class ApplicationController extends FOSRestController
     public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
-        
+
         $applications = $em->getRepository('AppBundle:Application')->findAll();
 
         return $applications;

@@ -135,4 +135,3 @@ class Feature
         return $this->product;
     }
 }
-
