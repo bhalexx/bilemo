@@ -12,7 +12,7 @@ class ClientMailer
     private $mailer;
 
     /**
-     * @var [type]
+     * @var string
      */
     private $templating;
 
@@ -25,8 +25,9 @@ class ClientMailer
     public function sendCredentialsEmail(Client $client)
     {
         $message = (new \Swift_Message('Welcome to Bilemo Galaxy!'))
-            ->setFrom('pookiedonnut@gmail.com')
+            ->setFrom(['contact@bilemo.com' => 'Bilemo'])
             ->setTo($client->getApplication()->getEmail())
+            ->setContentType('text/html')
             ->setBody(
                 $this->templating->render(
                     'Email/client_creation.html.twig',
