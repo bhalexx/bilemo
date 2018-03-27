@@ -33,6 +33,7 @@ class CreatePartnerCommand extends Command
             ->addArgument('password', InputArgument::REQUIRED, 'Your password')
             ->addArgument('email', InputArgument::REQUIRED, 'The name of your application')
             ->addArgument('redirectURI', InputArgument::REQUIRED, 'Your redirect URI')
+            ->addArgument('role', InputArgument::OPTIONAL, 'Your role (application or admin)')
             ->setHelp('This command allows you to create a new Bilemo partner application')
         ;
     }
@@ -40,13 +41,14 @@ class CreatePartnerCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Create application
+        $role = $input->getArgument('role') === 'admin' ? 'ROLE_ADMIN' : 'ROLE_APPLICATION';
         $application = new Application();
         $application
             ->setUsername($input->getArgument('name'))
             ->setPlainPassword($input->getArgument('password'))
             ->setEmail($input->getArgument('email'))
             ->setUri($input->getArgument('redirectURI'))
-            ->setRoles(['ROLE_APPLICATION']);
+            ->setRoles([$role]);
         //Save application
         $this->em->persist($application);
         $this->em->flush();
