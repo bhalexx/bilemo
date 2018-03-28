@@ -47,7 +47,7 @@ class User
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
@@ -58,7 +58,7 @@ class User
      *
      * @Serializer\Since("1.0")
      */
-    protected $username;
+    private $username;
 
     /**
      * @var string
@@ -69,7 +69,7 @@ class User
      *
      * @Serializer\Since("1.0")
      */
-    protected $firstname;
+    private $firstname;
 
     /**
      * @var string
@@ -80,7 +80,7 @@ class User
      *
      * @Serializer\Since("1.0")
      */
-    protected $lastname;
+    private $lastname;
 
     /**
      * @var string
@@ -91,7 +91,7 @@ class User
      *
      * @Serializer\Since("1.0")
      */
-    protected $email;
+    private $email;
 
     /**
      * @var string
@@ -100,7 +100,7 @@ class User
      *
      * @Serializer\Since("1.0")
      */
-    protected $phone;
+    private $phone;
 
     /**
      * @var ArrayCollection
@@ -114,7 +114,7 @@ class User
      *
      * @Serializer\Since("1.0")
      */
-    protected $applications;
+    private $applications;
 
     public function __construct()
     {
