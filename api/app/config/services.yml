@@ -71,6 +71,8 @@ services:
         class: AppBundle\Command\LoadFixturesCommand
         arguments:
             - '@doctrine.orm.entity_manager'
+            - '@security.token_storage'
+            - '@session'
         tags:
             -  { name: console.command }
 

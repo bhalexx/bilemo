@@ -4,9 +4,43 @@ application_1:
   uri: http://bilemo.com
   username: Bilemo
   password: password
+  users: []
 application_2:
   email: contact@openmobilerooms.com
   roles: [ROLE_APPLICATION]
   uri: http://openmobilerooms.com
   username: OpenMobileRooms
   password: password
+  users:
+    - username: bhalexx
+      firstname: Alex
+      lastname: Sandra
+      email: bhalexx@mail.com
+      phone: "0601010101"
+    - username: loubie
+      firstname: Louis
+      lastname: Bobbie
+      email: loubie@mail.com
+      phone: "0602020202"
+    - username: bhilie
+      firstname: Bill
+      lastname: Lee
+      email: bhilie@mail.com
+      phone: "0603030303"
+application_3:
+  email: contact@partner.com
+  roles: [ROLE_APPLICATION]
+  uri: http://partner.com
+  username: Partner
+  password: password
+  users:
+    - username: jean
+      firstname: Levis
+      lastname: Lew
+      email: levlew@mail.com
+      phone: "0604040404"
+    - username: poums
+      firstname: Doggy
+      lastname: Dog
+      email: doggypoums@mail.com
+      phone: "0605050505"

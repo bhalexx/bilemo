@@ -130,7 +130,7 @@ class Application implements UserInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="applications")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="applications", cascade={"remove"})
      *
      * @Serializer\Since("1.0")
      */
