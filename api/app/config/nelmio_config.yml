@@ -7,19 +7,14 @@ nelmio_api_doc:
       description: |
         Discover all Bilemo API methods you can use as a Bilemo partner.
         Use your credentials (`clientId`, `clientSecret`, `username` & `password`) to get authorization to try all those methods out.
-        Not a Bilemo Partner? What are you waiting for? Be part of us! [Contact us](http://google.com) to talk about your project.
+        Not a Bilemo Partner? What are you waiting for? Be part of us! [Contact us](#) to talk about your project.
+
+        First authenticate with authentication method right below!
       version: 1.0.0
       title: Bilemo API
-    securityDefinitions:
-      bearerAuth:
-        type: oauth2
-        description: If you're already a Bilemo partner, use your credentials to try those methods out.
-        flow: password
-        tokenUrl: '%root_uri%/oauth/v2/token'
-        name: Authorization
-    security:
-      - bearerAuth: []
     tags:
+      - name: authentication
+        description: Get your access_token to access API endpoints
       - name: os
         description: Everyting about Operating System
       - name: manufacturers
@@ -31,6 +26,43 @@ nelmio_api_doc:
       - name: applications
         description: Everyting about partner applications
     definitions:
+      Authentication:
+        type: object
+        properties:
+          grant_type:
+            type: "string"
+          client_id:
+            type: string
+          client_secret:
+            type: string
+          username:
+            type: string
+          password:
+            type: string
+      RefreshToken:
+        type: object
+        properties:
+          grant_type:
+            type: "string"
+          client_id:
+            type: string
+          client_secret:
+            type: string
+          refresh_token:
+            type: string
+      AccessToken:
+        type: object
+        properties:
+          access_token:
+            type: "string"
+          expires_in:
+            type: "integer"
+          token_type:
+            type: "string"
+          scope:
+            type: "string"
+          refresh_token:
+            type: string
       Os:
         type: object
         properties:
@@ -157,6 +189,38 @@ nelmio_api_doc:
           id:
             type: integer
     paths:
+      '/oauth/v2/token':
+        post:
+          tags:
+            - authentication
+          summary: Authenticate to get your access_token to access to API endpoints
+          description: |
+            You have to fill those parameters with the credentials you got from Bilemo:
+            ``````
+            {
+              "grant_type": "password",
+              "client_id": "{YourClientId}",
+              "client_secret": "{YourClientSecret}",
+              "username": "{YourApplicationName}",
+              "password": "{YourPassword}"
+            }
+            ``````
+          consumes:
+            - application/json
+          parameters:
+            - in: "body"
+              name: "body"
+              description: "Parameters needed to get your access_token"
+              required: true
+              schema:
+                $ref: "#/definitions/Authentication"
+          responses:
+            '200':
+              description: Successful operation
+              schema:
+                $ref: "#/definitions/AccessToken"
+            '400':
+              description: Bad request
       '/api/os':
         get:
           tags:
@@ -167,6 +231,12 @@ nelmio_api_doc:
             - application/json
           produces:
             - application/json
+          parameters:
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '200':
               description: Successful operation
@@ -185,6 +255,11 @@ nelmio_api_doc:
           produces:
             - application/json
           parameters:
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - in: "body"
               name: "body"
               description: "OS object that needs to be added"
@@ -213,6 +288,11 @@ nelmio_api_doc:
           produces:
             - application/json
           parameters:
+            - name: "Authorization"
+              in: "header"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - name: id
               in: path
               description: id of the OS to return
@@ -242,6 +322,11 @@ nelmio_api_doc:
               name: "id"
               required: true
               description: id of the OS to update
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - in: "body"
               name: "body"
               description: "OS object that needs to be updated"
@@ -276,6 +361,11 @@ nelmio_api_doc:
               name: "id"
               required: true
               description: id of the OS to delete
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '204':
               description: No content - OS successfully deleted
@@ -293,6 +383,12 @@ nelmio_api_doc:
             - application/json
           produces:
             - application/json
+          parameters:
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '200':
               description: Successful operation
@@ -311,6 +407,11 @@ nelmio_api_doc:
           produces:
             - application/json
           parameters:
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - in: "body"
               name: "body"
               description: "Manufacturer object that needs to be added"
@@ -344,6 +445,11 @@ nelmio_api_doc:
               description: id of the manufacturer to return
               required: true
               type: integer
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '200':
               description: Successful operation
@@ -368,6 +474,11 @@ nelmio_api_doc:
               name: "id"
               required: true
               description: id of the manufacturer to update
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - in: "body"
               name: "body"
               description: "Manufacturer object that needs to be updated"
@@ -402,6 +513,11 @@ nelmio_api_doc:
               name: "id"
               required: true
               description: id of the manufacturer to delete
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '204':
               description: No content - manufacturer successfully deleted
@@ -438,6 +554,11 @@ nelmio_api_doc:
               in: "query"
               description: "The pagination offset"
               type: integer
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '200':
               description: Successful operation
@@ -456,6 +577,11 @@ nelmio_api_doc:
           produces:
             - application/json
           parameters:
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - in: "body"
               name: "body"
               description: "Mobile object that needs to be added"
@@ -489,6 +615,11 @@ nelmio_api_doc:
               description: id of mobile to return
               required: true
               type: integer
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '200':
               description: Successful operation
@@ -513,6 +644,11 @@ nelmio_api_doc:
               name: "id"
               required: true
               description: id of the mobile to update
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - in: "body"
               name: "body"
               description: "Mobile object that needs to be updated"
@@ -547,6 +683,11 @@ nelmio_api_doc:
               name: "id"
               required: true
               description: id of the mobile to delete
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '204':
               description: No content - mobile successfully deleted
@@ -565,6 +706,12 @@ nelmio_api_doc:
             - application/json
           produces:
             - application/json
+          parameters:
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '200':
               description: Successful operation
@@ -584,6 +731,11 @@ nelmio_api_doc:
           produces:
             - application/json
           parameters:
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - in: "body"
               name: "body"
               description: "User object that needs to be added"
@@ -616,6 +768,11 @@ nelmio_api_doc:
               description: id of user to return
               required: true
               type: integer
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '200':
               description: Successful operation
@@ -641,6 +798,11 @@ nelmio_api_doc:
               name: "id"
               required: true
               description: id of the user to update
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - in: "body"
               name: "body"
               description: "User object that needs to be updated"
@@ -672,6 +834,11 @@ nelmio_api_doc:
               name: "id"
               required: true
               description: id of the user to delete
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '204':
               description: No content - user successfully deleted
@@ -688,6 +855,12 @@ nelmio_api_doc:
             - application/json
           produces:
             - application/json
+          parameters:
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '200':
               description: Successful operation
@@ -708,6 +881,11 @@ nelmio_api_doc:
           produces:
             - application/json
           parameters:
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - in: "body"
               name: "body"
               description: "Application object that needs to be added"
@@ -742,6 +920,11 @@ nelmio_api_doc:
               description: id of the application to return
               required: true
               type: integer
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '200':
               description: Successful operation
@@ -768,6 +951,11 @@ nelmio_api_doc:
               name: "id"
               required: true
               description: id of the application to update
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
             - in: "body"
               name: "body"
               description: "Application object that needs to be updated"
@@ -802,6 +990,11 @@ nelmio_api_doc:
               name: "id"
               required: true
               description: id of the application to delete
+            - in: "header"
+              name: "Authorization"
+              description: "Bearer {YourAccessToken}"
+              required: true
+              type: "string"
           responses:
             '204':
               description: No content - Application successfully deleted

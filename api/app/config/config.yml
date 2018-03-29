@@ -82,7 +82,7 @@ fos_rest:
     param_fetcher_listener: 'force'
     serializer:
         serialize_null: true
-        
+
 # FOSOAuthServer Configuration
 fos_oauth_server:
     db_driver: orm       # Drivers available: orm, mongodb, or propel
@@ -93,5 +93,5 @@ fos_oauth_server:
     service:
         user_provider: AppBundle\Security\ApplicationProvider
         options:
-            access_token_lifetime: 600000
+            access_token_lifetime: 3600000 # 1 hour
             token_type: Bearer

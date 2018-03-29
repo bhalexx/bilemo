@@ -75,7 +75,7 @@ Content-Type: application/json
 Authorization: Bearer {YourAccessToken}
 ```
 
-Your access token expires after 10 minutes. To get a new access token use your refresh token in your POST request headers on `/oauth/v2/token` with those parameters:
+Your access token expires after 1 hour. To get a new access token use your refresh token in your POST request headers on `/oauth/v2/token` with those parameters:
 ```
 {
   "grant_type": "refresh_token",
