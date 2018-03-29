@@ -1,12 +1,8 @@
 manufacturer_1:
   name: Apple
-manufacturer_2: 
+manufacturer_2:
   name: Samsung
-manufacturer_3: 
-  name: HTC
-manufacturer_4:
-  name: LG
-manufacturer_5:
-  name: Microsoft
-manufacturer_6:
+manufacturer_3:
   name: Huawei
+manufacturer_4:
+  name: Sony
