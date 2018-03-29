@@ -99,9 +99,9 @@ class UserController extends FOSRestController
 
     /**
      * @Rest\Delete(
-     *     path = "/api/users/{id}",
+     *     path = "/api/users/{userId}",
      *     name = "api_user_delete",
-     *     requirements = { "id" = "\d+" }
+     *     requirements = { "userId" = "\d+" }
      * )
      *
      * @Rest\View(
@@ -109,10 +109,10 @@ class UserController extends FOSRestController
      * )
      *
      */
-    public function deleteAction($id)
+    public function deleteAction($userId)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('AppBundle:User')->findOneById($id);
+        $user = $em->getRepository('AppBundle:User')->findOneById($userId);
 
         if ($user) {
             $em->remove($user);
