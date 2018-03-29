@@ -3,7 +3,7 @@ Version 1.0.0
 
 This project is a REST API for Bilemo to allow partners to display their mobile phones catalog.
 This API was built with **Symfony 3.4**.
-It's the 7th [OpenClassRooms](https://openclassrooms.com/) PHP/Symfony Developer project.
+It's the 7th [OpenClassRooms](https://openclassrooms.com/) PHP/Symfony Developer project. A working documentation demo can be found [here](https://www.bilemo.bhalexx.me/api/doc).
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c42fc2dbed964964985ca34c03c99d7c)](https://www.codacy.com/app/bhalexx/bilemo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bhalexx/bilemo&amp;utm_campaign=Badge_Grade)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7669fe651a7626557f7e/maintainability)](https://codeclimate.com/github/bhalexx/bilemo/maintainability)
