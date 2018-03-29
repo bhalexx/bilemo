@@ -71,4 +71,54 @@ class UserController extends FOSRestController
 
         return $user;
     }
+
+    /**
+     * @Rest\Put(
+     *     path = "/api/users/{id}",
+     *     name = "api_user_update",
+     *     requirements = { "id" = "\d+" }
+     * )
+     * @Rest\View(
+     *     statusCode = 200
+     * )
+     *
+     * @ParamConverter("newUser", converter="fos_rest.request_body")
+     */
+    public function updateAction(User $user, User $newUser)
+    {
+        $user->setUserName($newUser->getUserName());
+        $user->setFirstname($newUser->getFirstname());
+        $user->setLastname($newUser->getLastname());
+        $user->setEmail($newUser->getEmail());
+        $user->setPhone($newUser->getPhone());
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $user;
+    }
+
+    /**
+     * @Rest\Delete(
+     *     path = "/api/users/{userId}",
+     *     name = "api_user_delete",
+     *     requirements = { "userId" = "\d+" }
+     * )
+     *
+     * @Rest\View(
+     *     statusCode = 204
+     * )
+     *
+     */
+    public function deleteAction($userId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')->findOneById($userId);
+
+        if ($user) {
+            $em->remove($user);
+            $em->flush();
+        }
+
+        return;
+    }
 }

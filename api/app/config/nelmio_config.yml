@@ -67,11 +67,11 @@ nelmio_api_doc:
             type: integer
           pictures:
             type: array
-            items: 
+            items:
               $ref: "#/definitions/Picture"
           features:
             type: array
-            items: 
+            items:
               $ref: "#/definitions/Feature"
           os:
             $ref: "#/definitions/Os"
@@ -125,7 +125,7 @@ nelmio_api_doc:
             type: string
           applications:
             type: array
-            items: 
+            items:
               $ref: "#/definitions/Application"
       GetUser:
         allOf:
@@ -163,7 +163,7 @@ nelmio_api_doc:
             - os
           summary: Gets OS list
           description: This method allows you to get OS list.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -180,7 +180,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Adds a new OS"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to add a new OS.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -208,7 +208,7 @@ nelmio_api_doc:
             - os
           summary: Gets details of the selected OS.
           description: This method allows you to get the details of the selected OS.
-          consumes: 
+          consumes:
               - application/json
           produces:
             - application/json
@@ -233,7 +233,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Updates an existing OS"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to update an existing OS.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -267,7 +267,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Deletes an existing OS"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to delete an existing OS.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -289,7 +289,7 @@ nelmio_api_doc:
             - manufacturers
           summary: Gets manufacturers list
           description: This method allows you to get manufacturers list.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -306,7 +306,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Adds a new manufacturer"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to add a new manufacturer.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -334,7 +334,7 @@ nelmio_api_doc:
             - manufacturers
           summary: Gets details of the selected manufacturer.
           description: This method allows you to get the details of the selected manufacturer.
-          consumes: 
+          consumes:
               - application/json
           produces:
             - application/json
@@ -359,7 +359,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Updates an existing manufacturer"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to update an existing manufacturer.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -393,7 +393,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Deletes an existing manufacturer"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to delete an existing manufacturer.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -415,7 +415,7 @@ nelmio_api_doc:
             - mobiles
           summary: Gets mobiles list
           description: This method allows you to get mobiles list.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -451,7 +451,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Adds a new mobile"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to add a new mobile.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -479,7 +479,7 @@ nelmio_api_doc:
             - mobiles
           summary: Gets details of the selected mobile.
           description: This method allows you to get the details of the selected mobile.
-          consumes: 
+          consumes:
               - application/json
           produces:
             - application/json
@@ -504,7 +504,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Updates an existing mobile"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to update an existing mobile.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -538,7 +538,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Deletes an existing mobile"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to delete an existing mobile.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -561,7 +561,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Gets users list"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to get users list.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -579,7 +579,7 @@ nelmio_api_doc:
             - users
           summary: "Adds a new user"
           description: This method allows you to add a new user.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -606,7 +606,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Gets details of the selected user."
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to get the details of the selected user.
-          consumes: 
+          consumes:
               - application/json
           produces:
             - application/json
@@ -627,6 +627,56 @@ nelmio_api_doc:
               description: Forbidden - You are not allowed to access this method.
             '404':
               description: The requested user was not found.
+        put:
+          tags:
+            - users
+          summary: Updates an existing user
+          description: This method allows you to update an existing user.
+          consumes:
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the user to update
+            - in: "body"
+              name: "body"
+              description: "User object that needs to be updated"
+              required: true
+              schema:
+                $ref: "#/definitions/User"
+          responses:
+            '201':
+              description: User successfully updated
+              schema:
+                $ref: "#/definitions/GetUser"
+            '400':
+              description: Bad request - Invalid or missing data.
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
+            '404':
+              description: The requested mobile was not found.
+        delete:
+          tags:
+            - users
+          summary: Deletes an existing user
+          description: This method allows you to delete an existing user.
+          consumes:
+            - application/json
+          produces:
+            - application/json
+          parameters:
+            - in: "path"
+              name: "id"
+              required: true
+              description: id of the user to delete
+          responses:
+            '204':
+              description: No content - user successfully deleted
+            '401':
+              description: Unauthorized - You need a valid access token to get the permission to access this URL.
       '/api/applications':
         get:
           tags:
@@ -634,7 +684,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Gets partner applications list"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to get partner applications list.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -653,7 +703,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Adds a new partner application"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to add a new partner application.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -682,7 +732,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Gets details of the selected partner application."
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to get the details of the selected application.
-          consumes: 
+          consumes:
               - application/json
           produces:
             - application/json
@@ -709,7 +759,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Updates an existing partner application"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to update an existing application.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json
@@ -743,7 +793,7 @@ nelmio_api_doc:
           summary: "[BILEMO ADMIN ONLY] Deletes an existing partner application"
           description: |
             **BILEMO ADMIN ONLY** - This method allows you to delete an existing partner application.
-          consumes: 
+          consumes:
             - application/json
           produces:
             - application/json

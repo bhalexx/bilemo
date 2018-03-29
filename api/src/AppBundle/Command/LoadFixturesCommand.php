@@ -49,10 +49,6 @@ class LoadFixturesCommand extends Command
 		$this->application = $this->getApplication();
     	$this->application->setAutoExit(false);
 
-    	// Drop database
-    	$output->writeln('Dropping database');
-    	$this->dropDatabase();
-
     	// Prepare database environment
     	$output->writeln('Create database');
    		$this->createDatabase();
@@ -67,15 +63,6 @@ class LoadFixturesCommand extends Command
 
 			//Feedback end
         $output->writeln('Everything was successfully loaded.');
-	}
-
-	/**
-	 * Executes command to drop database
-	 */
-	private function dropDatabase()
-	{
-		$options = array('command' => 'doctrine:database:drop', '--force' => true);
-    	$this->application->run(new ArrayInput($options));
 	}
 
 	/**
