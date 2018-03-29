@@ -38,8 +38,9 @@ Those dependencies are included in composer.json.
 1. Clone this repository on your local machine by using this command line in your folder `git clone https://github.com/bhalexx/bilemo.git`.
 2. In project folder open a new terminal window and execute command line `composer install`.
 3. Rename `bilemo/app/config/parameters.yml.dist` in `bilemo/app/config/parameters.dist` and edit database parameters with yours.
-4. Execute command line `php bin/console bilemo:fixtures:load`. This command will create database and load some fixtures.
-5. Your project is now up to date!
+4. Edit `root`, `root_uri` and `picture_path` parameters in `config_dev.yml` with your project path.
+5. Execute command line `php bin/console bilemo:fixtures:load`. This command will create database and load some fixtures.
+6. Your project is now up to date!
 
 ### Authentication to access API
 This API is restricted to Bilemo partners. When a Bilemo admin adds your application as a new partner, your credentials are sent by email.
