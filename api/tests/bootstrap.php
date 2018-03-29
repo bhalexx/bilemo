@@ -2,7 +2,7 @@
 
 	require_once __DIR__.'/../vendor/autoload.php';
 	require_once __DIR__.'/../app/AppKernel.php';
-	
+
 	use Symfony\Bundle\FrameworkBundle\Console\Application;
 	use Symfony\Component\Console\Input\ArrayInput;
 
@@ -14,5 +14,5 @@
 	$application->setAutoExit(false);
 
 	// Load fixtures
-	$options = array('command' => 'bilemo:fixtures:load');
+	$options = array('command' => 'bilemo:fixtures:load', '--environment'=> 'test');
 	$application->run(new ArrayInput($options));
