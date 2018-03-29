@@ -8,9 +8,9 @@ mobile_1:
     - name: "Largeur de l'écran"
       value: "640 pixels"
     - name: "Hauteur de l'écran"
-      value: "1136 pixels"      
+      value: "1136 pixels"
     - name: "Appareil photo"
-      value: "12 Mpx"  
+      value: "12 Mpx"
   models:
     - price: 359.00
       colorName: Argent
@@ -64,3 +64,108 @@ mobile_2:
       stock: 15
       picturesFolder: "iphone_x/gris_sideral/"
       pictures: [ "1.png", "2.png", "3.png" ]
+mobile_3:
+  name: P20 Lite
+  manufacturer: Huawei
+  os: Android
+  features:
+    - name: "Multiple SIM"
+      value: "Oui"
+    - name: "Double caméra"
+      value: "Oui"
+    - name: "Capacité de la batterie"
+      value: "3000 mA"
+    - name: "Port de carte mémoire"
+      value: "Oui"
+  models:
+    - price: 319.00
+      colorName: Noir
+      colorCode: "000000"
+      memory: 64
+      stock: 145
+      picturesFolder: "p20_lite/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+mobile_4:
+  name: Galaxy S8
+  manufacturer: Samsung
+  os: Android
+  features:
+    - name: "Multiple SIM"
+      value: "Oui"
+    - name: "Double caméra"
+      value: "Oui"
+    - name: "Capacité de la batterie"
+      value: "3000 mA"
+    - name: "Port de carte mémoire"
+      value: "Oui"
+  models:
+    - price: 659.00
+      colorName: Noir
+      colorCode: "000000"
+      memory: 64
+      stock: 308
+      picturesFolder: "galaxy_s8/noir/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+    - price: 708.00
+      colorName: Rose
+      colorCode: F287D4
+      memory: 64
+      stock: 142
+      picturesFolder: "galaxy_s8/rose/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+    - price: 479.00
+      colorName: Argent
+      colorCode: CCCCCC
+      memory: 32
+      stock: 58
+      picturesFolder: "galaxy_s8/argent/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+mobile_5:
+  name: Galaxy Note 8
+  manufacturer: Samsung
+  os: Android
+  features:
+    - name: "Multiple SIM"
+      value: "Oui"
+    - name: "Double caméra"
+      value: "Oui"
+    - name: "Capacité de la batterie"
+      value: "3000 mA"
+    - name: "Port de carte mémoire"
+      value: "Oui"
+  models:
+    - price: 549.00
+      colorName: Noir
+      colorCode: "000000"
+      memory: 64
+      stock: 654
+      picturesFolder: "galaxy_note8/noir/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+    - price: 800.00
+      colorName: Or
+      colorCode: C5AE87
+      memory: 64
+      stock: 142
+      picturesFolder: "galaxy_note8/or/"
+      pictures: [ "1.png", "2.png", "3.png" ]
+mobile_6:
+  name: XA1 Ultra
+  manufacturer: Sony
+  os: Windows Phone
+  features:
+    - name: "Multiple SIM"
+      value: "Non"
+    - name: "Double caméra"
+      value: "Oui"
+    - name: "Capacité de la batterie"
+      value: "3000 mA"
+    - name: "Port de carte mémoire"
+      value: "Oui"
+  models:
+    - price: 349.00
+      colorName: Noir
+      colorCode: "000000"
+      memory: 32
+      stock: 38
+      picturesFolder: "xa1_ultra/"
+      pictures: [ "1.png", "2.png" ]
