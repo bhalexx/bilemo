@@ -1,0 +1,1496 @@
+{
+	"info": {
+		"_postman_id": "490c40b3-d453-4227-b945-ac78778c4bc5",
+		"name": "Bilemo API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OPENMOBILEROOMS",
+			"description": "This folder contains all ROLE_APPLICATION related API endpoints.",
+			"item": [
+				{
+					"name": "Authentication",
+					"description": "All OAuthentication related requests.",
+					"item": [
+						{
+							"name": "Request token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"grant_type\": \"password\",\n\t\"username\": \"OpenMobileRooms\",\n\t\"password\": \"password\",\n\t\"client_id\": \"2_57asc0uiu2sk8k0c0g4c0k00s40scwgc8ww008k4kk8s8wo0g8\",\n\t\"client_secret\": \"22nqf2glfx0k4so0k48cc04okwcok804kk4owccwc8w4wkkoos\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/oauth/v2/token",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"oauth",
+										"v2",
+										"token"
+									]
+								},
+								"description": "Request token as OpenMobileRooms partner application.\n\nOnce you get your access_token, copy paste it into environment 'partner_token' parameter.\n\nCopy paste your refresh_token into 'refresh_token' parameter in below 'Refresh token' request."
+							},
+							"response": []
+						},
+						{
+							"name": "Refresh token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"grant_type\": \"refresh_token\",\n\t\"client_id\": \"2_57asc0uiu2sk8k0c0g4c0k00s40scwgc8ww008k4kk8s8wo0g8\",\n\t\"client_secret\": \"22nqf2glfx0k4so0k48cc04okwcok804kk4owccwc8w4wkkoos\",\n\t\"refresh_token\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/oauth/v2/token",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"oauth",
+										"v2",
+										"token"
+									]
+								},
+								"description": "Request token as OpenMobileRooms with refresh_token (to replace in body params)"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Mobiles",
+					"description": "All mobiles available requests.",
+					"item": [
+						{
+							"name": "Get mobiles",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/mobiles?limit=5&offset=1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"mobiles"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "offset",
+											"value": "1"
+										}
+									]
+								},
+								"description": "Get mobiles list.\nParameters limit and offset may be changed.\nAll available parameters:\n- manufacturer: int manufacturerId\n- limit: int limit\n- order: string order (asc|desc - default: asc)\n- offset: int offset"
+							},
+							"response": []
+						},
+						{
+							"name": "Get single mobile",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/mobiles/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"mobiles",
+										"1"
+									]
+								},
+								"description": "Change id param to get another mobile."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ac878c91-b225-4946-8af3-95d6a79d5c4b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "2834df46-4608-4c42-aca8-19c782b57491",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Users",
+					"description": "All users available requests.",
+					"item": [
+						{
+							"name": "Create user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"Yoda\",\n\t\"firstname\": \"Maitre\",\n\t\"lastname\": \"Jedi\",\n\t\"email\": \"yoda@galaxy.org\",\n\t\"phone\": \"0611111111\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/users",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								},
+								"description": "Send your user to API"
+							},
+							"response": []
+						},
+						{
+							"name": "Update user",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"New username\",\n\t\"firstname\": \"New firstname\",\n\t\"lastname\": \"New lastname\",\n\t\"email\": \"new_email@mail.com\",\n\t\"phone\": \"0601010101\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/users/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"1"
+									]
+								},
+								"description": "Change id param to update another user."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete user",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/users/5",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"5"
+									]
+								},
+								"description": "Change id param to delete another user."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "43cc83d0-e69a-42b6-bd98-5ecd84128243",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "465abda8-5166-4702-b675-51737b2a08e1",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Manufacturers",
+					"description": "All manufacturers available requests.",
+					"item": [
+						{
+							"name": "Get manufacturers",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/manufacturers",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"manufacturers"
+									]
+								},
+								"description": "Get manufacturers list."
+							},
+							"response": []
+						},
+						{
+							"name": "Get single manufacturer",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/manufacturers/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"manufacturers",
+										"1"
+									]
+								},
+								"description": "Change id param to get another manufacturer."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "bef92b0e-c954-48ef-9bbe-0dc5f98a5d73",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6631299-6cb5-41de-9286-7fa8b3777d15",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "OS",
+					"description": "All OS available requests.",
+					"item": [
+						{
+							"name": "Get OS's",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/os",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"os"
+									]
+								},
+								"description": "Get OS's list."
+							},
+							"response": []
+						},
+						{
+							"name": "Get single OS",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/os/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"os",
+										"1"
+									]
+								},
+								"description": "Change id param to get another OS."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "bef92b0e-c954-48ef-9bbe-0dc5f98a5d73",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6631299-6cb5-41de-9286-7fa8b3777d15",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a856713d-212f-4520-b81c-8f57a4c7410c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "bce2a1dc-087b-4034-88aa-f1bdd14320df",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "ADMIN",
+			"description": "This folder contains all ROLE_BILEMO related API endpoints.",
+			"item": [
+				{
+					"name": "Authentication",
+					"description": "All OAuthentication related requests.",
+					"item": [
+						{
+							"name": "Request token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"grant_type\": \"password\",\n\t\"username\": \"Bilemo\",\n\t\"password\": \"password\",\n\t\"client_id\": \"1_adygvb8t2sooo4gkssg8s4wg4k48sok4kcsw04c84go0o4cog\",\n\t\"client_secret\": \"6858c4rlwsw8gcogkskc4cogko8gsws0ccw88wksks88kwsgkc\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/oauth/v2/token",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"oauth",
+										"v2",
+										"token"
+									]
+								},
+								"description": "Request token as Bilemo admin application.\r\n\r\nOnce you get your access_token, copy paste it into environment 'admin_token' parameter.\r\n\r\nCopy paste your refresh_token into 'refresh_token' parameter in below 'Refresh token' request."
+							},
+							"response": []
+						},
+						{
+							"name": "Refresh token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"grant_type\": \"refresh_token\",\n\t\"client_id\": \"1_adygvb8t2sooo4gkssg8s4wg4k48sok4kcsw04c84go0o4cog\",\n\t\"client_secret\": \"6858c4rlwsw8gcogkskc4cogko8gsws0ccw88wksks88kwsgkc\",\n\t\"refresh_token\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/oauth/v2/token",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"oauth",
+										"v2",
+										"token"
+									]
+								},
+								"description": "Request token as Bilemo admin with refresh_token (to replace in body params)"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Mobiles",
+					"description": "All mobiles available requests.",
+					"item": [
+						{
+							"name": "Get mobiles",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/mobiles?limit=5&offset=1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"mobiles"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "offset",
+											"value": "1"
+										}
+									]
+								},
+								"description": "Get mobiles list.\nParameters limit and offset may be changed.\nAll available parameters:\n- manufacturer: int manufacturerId\n- limit: int limit\n- order: string order (asc|desc - default: asc)\n- offset: int offset"
+							},
+							"response": []
+						},
+						{
+							"name": "Get single mobile",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/mobiles/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"mobiles",
+										"1"
+									]
+								},
+								"description": "Change id param to get another mobile."
+							},
+							"response": []
+						},
+						{
+							"name": "[BETA] Create mobile",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"JediPhone\",\n\t\"manufacturer\": {\n\t\t\"id\": 1,\n\t\t\"name\": \"Apple\"\n\t},\n\t\"os\": {\n\t\t\"id\": 1,\n\t\t\"name\": \"iOS\"\n\t},\n\t\"price\": 748.00,\n\t\"color_name\": \"Vert\",\n\t\"color_code\": \"F0F0F0\",\n\t\"memory\": 923,\n\t\"stock\": 1052,\n\t\"features\": [\n\t\t{\n\t\t\t\"name\": \"Taille de l'écran\",\n\t\t\t\"value\": \"4 pouces\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"Multiple SIM\",\n\t\t\t\"value\": \"Non\"\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/mobiles",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"mobiles"
+									]
+								},
+								"description": "[WARNING] This endpoint is still in beta mode. Some mobile properties may not be created correctly."
+							},
+							"response": []
+						},
+						{
+							"name": "[BETA] Update mobile",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"YodaPhone\",\n\t\"manufacturer\": {\n\t\t\"id\": 1,\n\t\t\"name\": \"Apple\"\n\t},\n\t\"os\": {\n\t\t\"id\": 1,\n\t\t\"name\": \"iOS\"\n\t},\n\t\"price\": 645.00,\n\t\"color_name\": \"Vert\",\n\t\"color_code\": \"F0F0F0\",\n\t\"memory\": 923,\n\t\"stock\": 1052,\n\t\"features\": [\n\t\t{\n\t\t\t\"name\": \"Taille de l'écran\",\n\t\t\t\"value\": \"4 pouces\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"Multiple SIM\",\n\t\t\t\"value\": \"Non\"\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/mobiles/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"mobiles",
+										"1"
+									]
+								},
+								"description": "Change id param to update another mobile.\n\n[WARNING] This endpoint is still in beta mode. Several mobile properties may not be updated correctly."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete mobile",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/mobiles/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"mobiles",
+										"1"
+									]
+								},
+								"description": "Change id param to delete another mobile."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ac878c91-b225-4946-8af3-95d6a79d5c4b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "2834df46-4608-4c42-aca8-19c782b57491",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Users",
+					"description": "All users available requests.",
+					"item": [
+						{
+							"name": "Get users",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/users",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								},
+								"description": "Get users list."
+							},
+							"response": []
+						},
+						{
+							"name": "Get single user",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/users/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"1"
+									]
+								},
+								"description": "Change id param to get another user."
+							},
+							"response": []
+						},
+						{
+							"name": "Create user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"Yoda\",\n\t\"firstname\": \"Maitre\",\n\t\"lastname\": \"Jedi\",\n\t\"email\": \"yoda@galaxy.org\",\n\t\"phone\": \"0611111111\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/users",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								},
+								"description": "Create a new user."
+							},
+							"response": []
+						},
+						{
+							"name": "Update user",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"New username\",\n\t\"firstname\": \"New firstname\",\n\t\"lastname\": \"New lastname\",\n\t\"email\": \"new_email@mail.com\",\n\t\"phone\": \"0601010101\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/users/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"1"
+									]
+								},
+								"description": "Change id param to update another user."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete user",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/users/5",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"5"
+									]
+								},
+								"description": "Change id param to delete another user."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "43cc83d0-e69a-42b6-bd98-5ecd84128243",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "465abda8-5166-4702-b675-51737b2a08e1",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Application",
+					"description": "All applications available requests.",
+					"item": [
+						{
+							"name": "Get applications",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/applications",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"applications"
+									]
+								},
+								"description": "Get applications list."
+							},
+							"response": []
+						},
+						{
+							"name": "Get single application",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/applications/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"applications",
+										"1"
+									]
+								},
+								"description": "Change id param to get another application."
+							},
+							"response": []
+						},
+						{
+							"name": "Create application",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"GalaxyMobile\",\n\t\"email\": \"contact@galaxy.org\",\n\t\"uri\": \"http://galaxy.org\",\n\t\"roles\": [\"ROLE_APPLICATION\"]\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/applications",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"applications"
+									]
+								},
+								"description": "Create a new partner application"
+							},
+							"response": []
+						},
+						{
+							"name": "Update application",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"New application name\",\n\t\"email\": \"newapplicationmail@mail.com\",\n\t\"uri\": \"http://newapplicationuri.com\",\n\t\"roles\": [\"ROLE_APPLICATION\"]\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/applications/4",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"applications",
+										"4"
+									]
+								},
+								"description": "Change id param to update another application."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete application",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/applications/4",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"applications",
+										"4"
+									]
+								},
+								"description": "Change id param to delete another application."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "43cc83d0-e69a-42b6-bd98-5ecd84128243",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "465abda8-5166-4702-b675-51737b2a08e1",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Manufacturers",
+					"description": "",
+					"item": [
+						{
+							"name": "Get manufacturers",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/manufacturers",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"manufacturers"
+									]
+								},
+								"description": "Get manufacturers list."
+							},
+							"response": []
+						},
+						{
+							"name": "Get single manufacturer",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/manufacturers/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"manufacturers",
+										"1"
+									]
+								},
+								"description": "Change id param to get another manufacturer."
+							},
+							"response": []
+						},
+						{
+							"name": "Create manufacturer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Galaxy Corp\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/manufacturers",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"manufacturers"
+									]
+								},
+								"description": "Create new manufacturer."
+							},
+							"response": []
+						},
+						{
+							"name": "Update manufacturer",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"New manufacturer name\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/manufacturers/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"manufacturers",
+										"1"
+									]
+								},
+								"description": "Change id param to update another manufacturer."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete manufacturer",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/manufacturers/5",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"manufacturers",
+										"5"
+									]
+								},
+								"description": "Change id param to delete another manufacturer."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "OS",
+					"description": "All OS available requests.",
+					"item": [
+						{
+							"name": "Get OS's",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/os",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"os"
+									]
+								},
+								"description": "Get OS's list."
+							},
+							"response": []
+						},
+						{
+							"name": "Get single OS",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{partner_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/os/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"os",
+										"1"
+									]
+								},
+								"description": "Change id param to get another OS."
+							},
+							"response": []
+						},
+						{
+							"name": "Create OS",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"JediOS\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/os",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"os"
+									]
+								},
+								"description": "Create new manufacturer."
+							},
+							"response": []
+						},
+						{
+							"name": "Update OS",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"New OS name\"\n}"
+								},
+								"url": {
+									"raw": "{{uri}}/api/os/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"os",
+										"1"
+									]
+								},
+								"description": "Change id param to update another OS."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete OS",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{uri}}/api/os/1",
+									"host": [
+										"{{uri}}"
+									],
+									"path": [
+										"api",
+										"os",
+										"1"
+									]
+								},
+								"description": "Change id param to delete another OS."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "bef92b0e-c954-48ef-9bbe-0dc5f98a5d73",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "b6631299-6cb5-41de-9286-7fa8b3777d15",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "64bd1a13-ed59-4ff0-b7a8-0a5f577479b0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "24b1d9c8-33a1-4da2-be07-04dcce318cb5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
