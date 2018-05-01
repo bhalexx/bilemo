@@ -53,12 +53,12 @@ services:
             - { name: doctrine.event_listener, event: prePersist }
 
     mobile.doctrine_subscriber:
-        class: AppBundle\DoctrineListener\MobileSubscriber
+        class: AppBundle\DoctrineSubscriber\MobileSubscriber
         tags:
             - { name: doctrine.event_subscriber, connection: default }
 
     user.doctrine_subscriber:
-        class: AppBundle\DoctrineListener\UserSubscriber
+        class: AppBundle\DoctrineSubscriber\UserSubscriber
         arguments:
             - '@security.token_storage'
         tags:

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\DoctrineListener;
+namespace AppBundle\DoctrineSubscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
@@ -46,7 +46,7 @@ class MobileSubscriber implements EventSubscriber
 	        $entity->setManufacturer($manufacturer);
 
 	        // Features
-	        foreach($entity->getFeatures() as $feature) {
+	        foreach ($entity->getFeatures() as $feature) {
 	        	$feature->setProduct($entity);
 	        }
         }
